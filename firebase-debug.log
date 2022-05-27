@@ -1,30 +1,30 @@
-[debug] [2022-05-27T08:18:10.110Z] ----------------------------------------------------------------------
-[debug] [2022-05-27T08:18:10.112Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2022-05-27T08:18:10.113Z] CLI Version:   11.0.0
-[debug] [2022-05-27T08:18:10.113Z] Platform:      win32
-[debug] [2022-05-27T08:18:10.113Z] Node Version:  v16.13.2
-[debug] [2022-05-27T08:18:10.114Z] Time:          Fri May 27 2022 13:48:10 GMT+0530 (India Standard Time)
-[debug] [2022-05-27T08:18:10.114Z] ----------------------------------------------------------------------
+[debug] [2022-05-27T09:18:34.421Z] ----------------------------------------------------------------------
+[debug] [2022-05-27T09:18:34.423Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2022-05-27T09:18:34.424Z] CLI Version:   11.0.0
+[debug] [2022-05-27T09:18:34.424Z] Platform:      win32
+[debug] [2022-05-27T09:18:34.424Z] Node Version:  v16.13.2
+[debug] [2022-05-27T09:18:34.437Z] Time:          Fri May 27 2022 14:48:34 GMT+0530 (India Standard Time)
+[debug] [2022-05-27T09:18:34.438Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2022-05-27T08:18:10.185Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2022-05-27T08:18:10.185Z] > authorizing via signed-in user (m.m.muthu1388@gmail.com)
-[debug] [2022-05-27T08:18:10.308Z] java version "18.0.1.1" 2022-04-22
+[debug] [2022-05-27T09:18:34.532Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-05-27T09:18:34.532Z] > authorizing via signed-in user (m.m.muthu1388@gmail.com)
+[debug] [2022-05-27T09:18:34.853Z] java version "18.0.1.1" 2022-04-22
 Java(TM) SE Runtime Environment (build 18.0.1.1+2-6)
 
-[debug] [2022-05-27T08:18:10.309Z] Java HotSpot(TM) 64-Bit Server VM (build 18.0.1.1+2-6, mixed mode, sharing)
+[debug] [2022-05-27T09:18:34.854Z] Java HotSpot(TM) 64-Bit Server VM (build 18.0.1.1+2-6, mixed mode, sharing)
 
-[debug] [2022-05-27T08:18:10.335Z] Parsed Java major version: 18
+[debug] [2022-05-27T09:18:34.867Z] Parsed Java major version: 18
 [info] i  emulators: Starting emulators: auth, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore"}}
-[debug] [2022-05-27T08:18:10.374Z] [hub] writing locator at C:\Users\ADMINI~1\AppData\Local\Temp\hub-chatting-app-dd1a5.json
-[debug] [2022-05-27T08:18:10.399Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2022-05-27T08:18:10.400Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2022-05-27T08:18:10.400Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Administrator\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.14.3.jar","--host","localhost","--port",8080,"--rules","D:\\Projects\\chatting-app\\firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Administrator\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.14.3.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"D:\\\\Projects\\\\chatting-app\\\\firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[debug] [2022-05-27T09:18:34.959Z] [hub] writing locator at C:\Users\ADMINI~1\AppData\Local\Temp\hub-chatting-app-dd1a5.json
+[debug] [2022-05-27T09:18:35.021Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-05-27T09:18:35.022Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-05-27T09:18:35.022Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Administrator\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.14.3.jar","--host","localhost","--port",8080,"--rules","D:\\Projects\\chatting-app\\firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Administrator\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.14.3.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"D:\\\\Projects\\\\chatting-app\\\\firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
-[debug] [2022-05-27T08:18:21.685Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2022-05-27T08:18:21.685Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2022-05-27T08:18:21.686Z] Starting Emulator UI with command {"binary":"node","args":["--dns-result-order=ipv4first","C:\\Users\\Administrator\\.cache\\firebase\\emulators\\ui-v1.7.0\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"--dns-result-order=ipv4first\",\"C:\\\\Users\\\\Administrator\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.7.0\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2022-05-27T09:18:46.577Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-05-27T09:18:46.578Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-05-27T09:18:46.578Z] Starting Emulator UI with command {"binary":"node","args":["--dns-result-order=ipv4first","C:\\Users\\Administrator\\.cache\\firebase\\emulators\\ui-v1.7.0\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"--dns-result-order=ipv4first\",\"C:\\\\Users\\\\Administrator\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.7.0\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2022-05-27T08:18:21.876Z] Web / API server started at localhost:4000
+[debug] [2022-05-27T09:18:46.735Z] Web / API server started at localhost:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
 [info] 
 ┌─────────────────────────────────────────────────────────────┐

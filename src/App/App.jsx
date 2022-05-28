@@ -12,7 +12,11 @@ function App() {
 
   console.log("app");
 
-  return <div className="App"> </div>;
+  return (
+    <div className="App-container">
+      <div className="App"></div>
+    </div>
+  );
 }
 
 export default App;

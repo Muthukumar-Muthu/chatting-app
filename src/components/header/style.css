@@ -1,0 +1,30 @@
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.75em;
+  background-color: #f0f2f5;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .settings {
+  margin-left: auto;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em;
+  background: inherit;
+}
+
+.header .profile-picture {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.header img {
+  border-radius: 50%;
+  height: 100%;
+}
+/*# sourceMappingURL=style.css.map */

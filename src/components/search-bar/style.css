@@ -1,0 +1,16 @@
+.search-bar {
+  margin-block: 1em;
+  margin-inline: 0.5em;
+}
+
+.search-bar input {
+  width: 100%;
+  background-color: #f0f2f5;
+  color: grey;
+  padding: 0.5em 0.75em;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  border: none;
+  font-size: medium;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,22 +1,33 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 .App-container {
-    background-color: #00a783;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #00a783;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App {
-    background-color: #f8f8f8;
-    width: 98%;
-    height: 95%;
+  background-color: #f8f8f8;
+  width: 98%;
+  height: 95%;
+  display: flex;
+}
+
+.leftbar {
+  flex: 1 1 30%;
+  min-width: 450px;
+}
+.rightbar {
+  flex: 1 5 70%;
 }

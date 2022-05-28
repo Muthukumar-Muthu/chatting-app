@@ -7,9 +7,13 @@
           box-sizing: border-box;
 }
 
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .App-container {
   background-color: #00a783;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -26,5 +30,21 @@
   background-color: #f8f8f8;
   width: 98%;
   height: 95%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.leftbar {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 30%;
+          flex: 1 1 30%;
+  min-width: 450px;
+}
+
+.rightbar {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 5 70%;
+          flex: 1 5 70%;
 }
 /*# sourceMappingURL=App.css.map */

@@ -1,14 +1,14 @@
 import "./style.css";
 import trimMsg from "../../functions/trimMsg";
 import { useEffect, useState } from "react";
-import getChat, { getChatDetail } from "../../firebase/functions/getChat";
+import { getChatDetail } from "../../firebase/functions/getChat";
 const Chat = ({ path, setShowChat }) => {
   const [chat, setChat] = useState({});
   useEffect(() => {
     getChatDetail(path)
       .then((response) => {
         setChat(response);
-        setShowChat(response);
+        setShowChat(response); //TODO: onclick on chat setshowchat should be executed
       })
       .catch((err) => console.warn(err));
   }, []);

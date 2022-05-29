@@ -1,9 +1,13 @@
 import "./style.css";
 
-const Message = ({ type, time, text }) => {
+const Message = ({ senderId, time, text }) => {
+  const loggedUserName = "Muthukumar";
   return (
     <div
-      className={(type === "s" ? "left-message" : "right-message") + " message"}
+      className={
+        (senderId === loggedUserName ? "right-message" : "left-message") +
+        " message"
+      }
     >
       <span className="text">{text}</span>
       <span className="time">{"12:32pm"}</span>

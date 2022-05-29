@@ -24,7 +24,7 @@ function App() {
         {user ? (
           <>
             <LeftBar setShowChat={setShowChat} chatList={chatList} />
-            <RightBar showChat={showChat} setShowChat={setShowChat} />
+            <RightBar showChat={showChat} />
           </>
         ) : (
           <div

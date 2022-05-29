@@ -1,0 +1,10 @@
+.login-button button {
+  padding: 0.5em 1em;
+  color: white;
+  background-color: #2cd82c;
+  border: none;
+  cursor: pointer;
+  font-size: larger;
+  border-radius: 10px;
+}
+/*# sourceMappingURL=style.css.map */

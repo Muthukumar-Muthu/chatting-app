@@ -11,4 +11,8 @@
     border: none;
     font-size: medium;
   }
+  input:focus-visible,
+  input:focus {
+    border: none;
+  }
 }

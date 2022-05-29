@@ -1,8 +1,29 @@
 .chat-area {
-  background-color: #f8f8f8;
+  background-color: #848080;
   height: 100%;
   display: flex;
   overflow-y: scroll;
   flex-direction: column;
   padding-inline: 2em;
+}
+
+/* width */
+.chat-area::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.chat-area::-webkit-scrollbar-track {
+  background: rgba(211, 211, 211, 0.2);
+}
+
+/* Handle */
+.chat-area::-webkit-scrollbar-thumb {
+  background: lightgrey;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.chat-area::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

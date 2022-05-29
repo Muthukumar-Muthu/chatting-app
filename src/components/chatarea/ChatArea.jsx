@@ -10,6 +10,16 @@ const ChatArea = () => {
     {
       type: "s",
       time: new Date().getFullYear(),
+      text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea tempora vel aliquam id blanditiis veritatis odit accusantium fuga minus quibusdam beatae voluptatibus, voluptatem animi itaque, laudantium eveniet temporibus laboriosam ipsa!",
+    },
+    {
+      type: "r",
+      time: new Date().getFullYear(),
+      text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea tempora vel aliquam id blanditiis veritatis odit accusantium fuga minus quibusdam beatae voluptatibus, voluptatem animi itaque, laudantium eveniet temporibus laboriosam ipsa!",
+    },
+    {
+      type: "s",
+      time: new Date().getFullYear(),
       text: "hi Muthu ❤",
     },
     {
@@ -23,16 +33,6 @@ const ChatArea = () => {
       text: "hi Muthu ❤",
     },
     {
-      type: "r",
-      time: new Date().getFullYear(),
-      text: "hi Muthu ❤",
-    },
-    {
-      type: "s",
-      time: new Date().getFullYear(),
-      text: "hi Muthu ❤",
-    },
-    {
       type: "s",
       time: new Date().getFullYear(),
       text: "hi Muthu ❤",
@@ -110,7 +110,7 @@ const ChatArea = () => {
     {
       type: "r",
       time: new Date().getFullYear(),
-      text: "hi Muthu ❤",
+      text: "hi Muthu  lorem  loremlorem lorem lorem lorem❤loremlorem lorem lorem lorem❤loremlorem lorem lorem lorem❤ vloremlorem lorem lorem lorem❤",
     },
     {
       type: "s",

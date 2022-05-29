@@ -3,6 +3,9 @@
   padding: 0.5em;
   box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
   margin-block: 0.25em;
+  max-width: 500px;
+  word-wrap: break-word;
+  border-radius: 7.5px;
   .time {
     font-size: x-small;
     margin-top: auto;
@@ -12,9 +15,12 @@
 }
 .left-message {
   margin-right: auto;
+  border-top-left-radius: 0;
   background-color: #ffffff;
 }
+
 .right-message {
+  border-top-right-radius: 0;
   margin-left: auto;
   background-color: #d9fdd3;
 }

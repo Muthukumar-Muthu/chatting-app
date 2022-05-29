@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 
 import startEmulator from "../firebase/services/localEmulator";
 import "./App.css";
@@ -7,11 +7,14 @@ import LeftBar from "../components/left-bar/LeftBar";
 import RightBar from "../components/right-bar/RightBar";
 import { UserContext } from "../context/UserContext";
 import LoginButton from "../components/login-button/LoginButton";
+import getChatList from "../firebase/functions/getChatList";
 function App() {
+  const [chatList, setChatList] = useState([]);
   const runEmulator = useRef({ run: true });
   const { user } = useContext(UserContext);
   useEffect(() => {
     startEmulator(runEmulator);
+    getChatList(setChatList);
   }, []);
 
   return (
@@ -19,7 +22,7 @@ function App() {
       <div className="App">
         {user ? (
           <>
-            <LeftBar />
+            <LeftBar chatList={chatList} />
             <RightBar />
           </>
         ) : (

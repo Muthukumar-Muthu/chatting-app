@@ -2,11 +2,14 @@ import "./style.css";
 import trimMsg from "../../functions/trimMsg";
 import { useEffect, useState } from "react";
 import getChat, { getChatDetail } from "../../firebase/functions/getChat";
-const Chat = ({ path }) => {
+const Chat = ({ path, setShowChat }) => {
   const [chat, setChat] = useState({});
   useEffect(() => {
     getChatDetail(path)
-      .then((response) => setChat(response))
+      .then((response) => {
+        setChat(response);
+        setShowChat(response);
+      })
       .catch((err) => console.warn(err));
   }, []);
   return (

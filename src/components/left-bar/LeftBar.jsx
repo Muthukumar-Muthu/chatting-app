@@ -5,7 +5,7 @@ import SearchBar from "../search-bar/SearchBar";
 import ChatList from "../chat-list/ChatList";
 import getChatListHeight from "../../functions/getChatListHeight";
 
-const LeftBar = ({ chatList }) => {
+const LeftBar = ({ setShowChat, chatList }) => {
   const [chatListHeight, setChatListHeight] = useState(0);
   useEffect(() => {
     setChatListHeight(getChatListHeight());
@@ -20,7 +20,7 @@ const LeftBar = ({ chatList }) => {
         }}
         className="chatlist-wrapper"
       >
-        <ChatList chatList={chatList} />
+        <ChatList chatList={chatList} setShowChat={setShowChat} />
       </div>
     </section>
   );

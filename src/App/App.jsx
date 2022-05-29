@@ -10,6 +10,7 @@ import LoginButton from "../components/login-button/LoginButton";
 import getChatList from "../firebase/functions/getChatList";
 function App() {
   const [chatList, setChatList] = useState([]);
+  const [showChat, setShowChat] = useState({});
   const runEmulator = useRef({ run: true });
   const { user } = useContext(UserContext);
   useEffect(() => {
@@ -22,8 +23,8 @@ function App() {
       <div className="App">
         {user ? (
           <>
-            <LeftBar chatList={chatList} />
-            <RightBar />
+            <LeftBar setShowChat={setShowChat} chatList={chatList} />
+            <RightBar showChat={showChat} setShowChat={setShowChat} />
           </>
         ) : (
           <div

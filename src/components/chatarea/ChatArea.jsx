@@ -1,6 +1,6 @@
 import "./style.css";
 import Message from "../message/Message";
-const ChatArea = () => {
+const ChatArea = ({ setShowChat }) => {
   const array = [
     {
       type: "s",

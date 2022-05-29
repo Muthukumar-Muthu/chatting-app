@@ -1,0 +1,37 @@
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: #f0f2f5;
+  align-items: center;
+  cursor: pointer;
+  .search-button {
+    margin-left: auto;
+  }
+  .chat-words {
+    margin-left: 2em;
+  }
+  .chat-title {
+    font-weight: normal;
+    font-size: large;
+  }
+  .chat-about {
+    color: #667781;
+    font-size: small;
+  }
+  .settings {
+    border: none;
+    cursor: pointer;
+    padding: 0.5em;
+    background: inherit;
+  }
+  .profile-picture {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+  img {
+    border-radius: 50%;
+    height: 100%;
+  }
+}

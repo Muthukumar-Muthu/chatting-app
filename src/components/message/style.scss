@@ -1,0 +1,20 @@
+.message {
+  display: flex;
+  padding: 0.5em;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+  margin-block: 0.25em;
+  .time {
+    font-size: x-small;
+    margin-top: auto;
+    margin-left: 0.5em;
+    color: #667781;
+  }
+}
+.left-message {
+  margin-right: auto;
+  background-color: #ffffff;
+}
+.right-message {
+  margin-left: auto;
+  background-color: #d9fdd3;
+}

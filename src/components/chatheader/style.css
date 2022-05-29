@@ -1,0 +1,51 @@
+.chat-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5em;
+  background-color: #f0f2f5;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.chat-header .search-button {
+  margin-left: auto;
+}
+
+.chat-header .chat-words {
+  margin-left: 2em;
+}
+
+.chat-header .chat-title {
+  font-weight: normal;
+  font-size: large;
+}
+
+.chat-header .chat-about {
+  color: #667781;
+  font-size: small;
+}
+
+.chat-header .settings {
+  border: none;
+  cursor: pointer;
+  padding: 0.5em;
+  background: inherit;
+}
+
+.chat-header .profile-picture {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.chat-header img {
+  border-radius: 50%;
+  height: 100%;
+}
+/*# sourceMappingURL=style.css.map */

@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Copyable from "../copyable/Copyable";
+import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -36,10 +38,17 @@ export default function BasicModal({ content }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            dfsdhjfhjs
+            Share the Link at the bottom with your firend to start chat
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <Copyable
+              content={
+                <Link target={"_blank"} to={`chat/${content}`}>
+                  {window.location.hostname + `/chat/${content}`}
+                </Link>
+              }
+              copyContent={window.location.hostname + `/chat/${content}`}
+            />
           </Typography>
         </Box>
       </Modal>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import getChatDetail from "../../firebase/functions/getChatDetail";
 import timeStampToDate from "../../firebase/functions/timeStampToDate";
 
-const Chat = ({ chatDetail, setShowChat }) => {
+const Chat = ({ chatDetail, showChat, setShowChat }) => {
   const { chatId } = chatDetail;
   const lastMessageTime = timeStampToDate(chatDetail.lastUpdateTime);
   console.log(chatId, "in chat component");
@@ -19,7 +19,13 @@ const Chat = ({ chatDetail, setShowChat }) => {
     setShowChat({ ...chat, chatId });
   }
   return (
-    <div className="chat" onClick={clickHandler}>
+    <div
+      className="chat"
+      style={{
+        backgroundColor: showChat.chatId === chatId ? "#f0f2f5" : "white",
+      }}
+      onClick={clickHandler}
+    >
       <div className="chat-image">
         <img src={chat.chatImg} alt="" />
       </div>

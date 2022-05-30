@@ -11,7 +11,7 @@ export default async function joinChat(userId, chatId) {
 
 async function updateChatObj(userId, chatId, chatDetail) {
   const updatedMembersId = [...chatDetail.membersId, userId];
-  await updateDoc(doc(db, `chats/${chatId}`), {
+  await addDoc(doc(db, `chats/${chatId}`), {
     ...chatDetail,
     membersId: updatedMembersId,
   });

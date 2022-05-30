@@ -23,7 +23,7 @@ const TypeArea = ({ showChat }) => {
       <button
         className="send-button"
         onClick={() => {
-          sendMessage(getUserId(), chatId, typedMessage);
+          sendMessage(getUserId(), showChat, chatId, typedMessage);
           setTypedMessage("");
         }}
       >

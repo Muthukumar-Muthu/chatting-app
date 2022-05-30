@@ -1,7 +1,7 @@
 import "./style.css";
 import Chat from "../chat/Chat";
 
-const ChatList = ({ chatList, setShowChat }) => {
+const ChatList = ({ chatList, showChat, setShowChat }) => {
   //get from chats
   console.log(chatList);
 
@@ -10,6 +10,7 @@ const ChatList = ({ chatList, setShowChat }) => {
       {chatList.map((chatDetail) => (
         <Chat
           key={chatDetail.docId}
+          showChat={showChat}
           setShowChat={setShowChat}
           chatDetail={chatDetail}
         />

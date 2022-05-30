@@ -27,7 +27,11 @@ const Home = () => {
     <div className="App">
       {user ? (
         <>
-          <LeftBar setShowChat={setShowChat} chatList={chatList} />
+          <LeftBar
+            showChat={showChat}
+            setShowChat={setShowChat}
+            chatList={chatList}
+          />
           <RightBar showChat={showChat} />
         </>
       ) : (

@@ -11,9 +11,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
   const lastMessageTime = timeStampToDate(chat.lastUpdateTime);
   console.log(chatId, "in chat component");
   useEffect(() => {
-    getChatDetail(chatId)
-      .then((response) => setChat(response))
-      .catch((err) => console.warn(err));
+    getChatDetail(chatId, setChat);
   }, []);
 
   function clickHandler() {

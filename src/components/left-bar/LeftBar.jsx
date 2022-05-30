@@ -4,6 +4,7 @@ import Header from "../header/Header";
 import SearchBar from "../search-bar/SearchBar";
 import ChatList from "../chat-list/ChatList";
 import getChatListHeight from "../../functions/getChatListHeight";
+import NewChat from "../newChat/NewChat";
 
 const LeftBar = ({ setShowChat, chatList }) => {
   const [chatListHeight, setChatListHeight] = useState(0);
@@ -13,6 +14,7 @@ const LeftBar = ({ setShowChat, chatList }) => {
   return (
     <section className="leftbar">
       <Header />
+      <NewChat />
       <SearchBar />
       <div
         style={{

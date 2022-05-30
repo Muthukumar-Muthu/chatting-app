@@ -1,0 +1,12 @@
+.modal-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgb(181, 179, 179);
+  opacity: 0.5;
+  display: grid;
+  place-items: center;
+}
+.modal {
+}

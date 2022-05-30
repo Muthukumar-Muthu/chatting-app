@@ -11,12 +11,15 @@ import getChatList from "../firebase/functions/getChatList";
 
 import getUserDetailsFromDb from "../firebase/functions/getUserDetailsFromDb";
 import { getUserId } from "../firebase/functions/getUserDetailsFromAuth";
+import Modal from "../components/modal/Modal";
+
 function App() {
   const [chatList, setChatList] = useState([]);
   const [showChat, setShowChat] = useState({});
   const [userDetails, setUserDetails] = useState({});
   const runEmulator = useRef({ run: true });
   const { user } = useContext(UserContext);
+
   useEffect(() => {
     startEmulator(runEmulator);
     getUserDetailsFromDb(getUserId())
@@ -36,6 +39,7 @@ function App() {
           <>
             <LeftBar setShowChat={setShowChat} chatList={chatList} />
             <RightBar showChat={showChat} />
+            <Modal />
           </>
         ) : (
           <div

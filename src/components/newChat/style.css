@@ -1,0 +1,14 @@
+.new-chat {
+  margin-block: 1em;
+}
+
+.new-chat button {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: lightgreen;
+  color: darkslategray;
+  cursor: pointer;
+  padding: 1em;
+}
+/*# sourceMappingURL=style.css.map */

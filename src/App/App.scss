@@ -16,6 +16,7 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .App {
@@ -23,6 +24,7 @@ body,
   width: 98%;
   height: 95%;
   display: flex;
+  position: relative;
 }
 
 .leftbar {

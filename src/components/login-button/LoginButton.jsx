@@ -3,9 +3,13 @@ import { auth } from "../../firebase/services/auth";
 import "./style.css";
 const LoginButton = () => {
   async function loginHandler() {
-    const googleProvider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, googleProvider);
-    console.log(`result - ${result}`);
+    try {
+      const googleProvider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log(`result - ${result}`);
+    } catch (err) {
+      console.warn(err);
+    }
   }
   return (
     <div className="login-button" onClick={loginHandler}>

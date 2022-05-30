@@ -6,9 +6,10 @@ import timeStampToDate from "../../firebase/functions/timeStampToDate";
 
 const Chat = ({ chatDetail, showChat, setShowChat }) => {
   const { chatId } = chatDetail;
-  const lastMessageTime = timeStampToDate(chatDetail.lastUpdateTime);
-  console.log(chatId, "in chat component");
   const [chat, setChat] = useState({});
+
+  const lastMessageTime = timeStampToDate(chat.lastUpdateTime);
+  console.log(chatId, "in chat component");
   useEffect(() => {
     getChatDetail(chatId)
       .then((response) => setChat(response))
@@ -16,7 +17,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
   }, []);
 
   function clickHandler() {
-    setShowChat({ ...chat, chatId });
+    if (showChat.chatId !== chatId) setShowChat({ chatId, ...chat });
   }
   return (
     <div

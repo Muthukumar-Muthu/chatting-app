@@ -39,7 +39,6 @@ function App() {
           <>
             <LeftBar setShowChat={setShowChat} chatList={chatList} />
             <RightBar showChat={showChat} />
-            <Modal />
           </>
         ) : (
           <div

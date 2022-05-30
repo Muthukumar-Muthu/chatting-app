@@ -13,9 +13,9 @@ async function generateNewChat(uid) {
     lastUpdateTime: serverTimestamp(),
     membersId: [uid],
   });
-  console.log(chatId);
+  console.log(chatId.id);
 
-  return chatId;
+  return chatId.id;
 }
 
 export default generateNewChat;

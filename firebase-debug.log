@@ -1,0 +1,23 @@
+[debug] [2022-05-30T06:27:33.232Z] ----------------------------------------------------------------------
+[debug] [2022-05-30T06:27:33.235Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --export-on-exit=./saved-data --import=./saved-data
+[debug] [2022-05-30T06:27:33.236Z] CLI Version:   11.0.0
+[debug] [2022-05-30T06:27:33.236Z] Platform:      win32
+[debug] [2022-05-30T06:27:33.236Z] Node Version:  v16.13.2
+[debug] [2022-05-30T06:27:33.237Z] Time:          Mon May 30 2022 11:57:33 GMT+0530 (India Standard Time)
+[debug] [2022-05-30T06:27:33.237Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-05-30T06:27:33.311Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-05-30T06:27:33.312Z] > authorizing via signed-in user (m.m.muthu1388@gmail.com)
+[debug] [2022-05-30T06:27:33.457Z] java version "18.0.1.1" 2022-04-22
+
+[debug] [2022-05-30T06:27:33.458Z] Java(TM) SE Runtime Environment (build 18.0.1.1+2-6)
+Java HotSpot(TM) 64-Bit Server VM (build 18.0.1.1+2-6, mixed mode, sharing)
+
+[debug] [2022-05-30T06:27:33.482Z] Parsed Java major version: 18
+[info] i  emulators: Starting emulators: auth, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore"}}
+[debug] [2022-05-30T06:27:33.539Z] [hub] writing locator at C:\Users\ADMINI~1\AppData\Local\Temp\hub-chatting-app-dd1a5.json
+[info] i  firestore: Importing data from D:\Projects\chatting-app\saved-data\firestore_export\firestore_export.overall_export_metadata {"metadata":{"emulator":{"name":"firestore"},"message":"Importing data from D:\\Projects\\chatting-app\\saved-data\\firestore_export\\firestore_export.overall_export_metadata"}}
+[debug] [2022-05-30T06:27:33.570Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-05-30T06:27:33.571Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-05-30T06:27:33.571Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Administrator\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.14.3.jar","--host","localhost","--port",8080,"--seed_from_export","D:\\Projects\\chatting-app\\saved-data\\firestore_export\\firestore_export.overall_export_metadata","--rules","D:\\Projects\\chatting-app\\firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Administrator\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.14.3.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--seed_from_export\",\"D:\\\\Projects\\\\chatting-app\\\\saved-data\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"D:\\\\Projects\\\\chatting-app\\\\firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}

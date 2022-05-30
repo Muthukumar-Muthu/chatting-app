@@ -3,7 +3,8 @@ import trimMsg from "../../functions/trimMsg";
 import { useEffect, useState } from "react";
 import getChatDetail from "../../firebase/functions/getChatDetail";
 
-const Chat = ({ chatDetail: { chatId } }) => {
+const Chat = ({ chatDetail, setShowChat }) => {
+  const { chatId } = chatDetail;
   console.log(chatId, "in chat component");
   const [chat, setChat] = useState({});
   useEffect(() => {
@@ -11,8 +12,12 @@ const Chat = ({ chatDetail: { chatId } }) => {
       .then((response) => setChat(response))
       .catch((err) => console.warn(err));
   }, []);
+
+  function clickHandler() {
+    setShowChat({ ...chat, chatId });
+  }
   return (
-    <div className="chat">
+    <div className="chat" onClick={clickHandler}>
       <div className="chat-image">
         <img src={chat.chatImg} alt="" />
       </div>

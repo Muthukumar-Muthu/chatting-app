@@ -7,7 +7,7 @@ const RightBar = ({ showChat }) => {
     <section className="rightbar">
       <ChatHeader showChat={showChat} />
       <ChatArea showChat={showChat} />
-      <TypeArea />
+      <TypeArea showChat={showChat} />
     </section>
   );
 };

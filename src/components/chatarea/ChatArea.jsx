@@ -5,10 +5,11 @@ import { getChat } from "../../firebase/functions/getChat";
 const ChatArea = ({ showChat }) => {
   const [messages, setMessages] = useState([]);
   useEffect(() => {
-    // if (showChat.chatPath) {
-    //   getChat(showChat.chatPath, setMessages);
-    // }
+    if (showChat.chatId) {
+      getChat(showChat.chatId, setMessages);
+    }
   }, [showChat]);
+  console.log("showchat", showChat);
 
   return (
     <section className="chat-area">

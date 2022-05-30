@@ -8,7 +8,11 @@ const ChatList = ({ chatList, setShowChat }) => {
   return (
     <div className="chat-list">
       {chatList.map((chatDetail) => (
-        <Chat key={chatDetail.docId} chatDetail={chatDetail} />
+        <Chat
+          key={chatDetail.docId}
+          setShowChat={setShowChat}
+          chatDetail={chatDetail}
+        />
       ))}
     </div>
   );

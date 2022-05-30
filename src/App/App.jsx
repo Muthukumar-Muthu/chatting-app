@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import "./global.css";
-
+import startEmulator from "../firebase/services/localEmulator";
 import ChatPage from "../routes/chat-page/ChatPage";
 import Home from "../routes/home/Home";
 

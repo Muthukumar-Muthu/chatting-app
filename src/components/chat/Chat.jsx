@@ -1,7 +1,7 @@
 import "./style.css";
 import trimMsg from "../../functions/trimMsg";
 import { useEffect, useState } from "react";
-import { getChatDetail } from "../../firebase/functions/getChat";
+import { getChatDetail } from "../../firebase/functions/getChatDetail";
 const Chat = ({ path, setShowChat }) => {
   const [chat, setChat] = useState({});
   useEffect(() => {

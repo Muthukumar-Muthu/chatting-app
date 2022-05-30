@@ -8,13 +8,24 @@ import RightBar from "../components/right-bar/RightBar";
 import { UserContext } from "../context/UserContext";
 import LoginButton from "../components/login-button/LoginButton";
 import getChatList from "../firebase/functions/getChatList";
+
+import getUserDetailsFromDb from "../firebase/functions/getUserDetailsFromDb";
+import { getUserId } from "../firebase/functions/getUserDetailsFromAuth";
 function App() {
   const [chatList, setChatList] = useState([]);
   const [showChat, setShowChat] = useState({});
+  const [userDetails, setUserDetails] = useState({});
   const runEmulator = useRef({ run: true });
   const { user } = useContext(UserContext);
   useEffect(() => {
     startEmulator(runEmulator);
+    getUserDetailsFromDb(getUserId())
+      .then((response) => {
+        console.log(response);
+
+        setUserDetails(response);
+      })
+      .catch((err) => console.warn(err));
     getChatList(setChatList);
   }, []);
 

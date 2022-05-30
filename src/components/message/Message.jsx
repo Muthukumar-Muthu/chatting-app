@@ -1,15 +1,15 @@
 import "./style.css";
-
-const Message = ({ senderId, time, text }) => {
-  const loggedUserName = "Muthukumar";
+import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
+const Message = ({ messageContent, senderId }) => {
+  const loggedUserId = getUserId();
   return (
     <div
       className={
-        (senderId === loggedUserName ? "right-message" : "left-message") +
+        (senderId === loggedUserId ? "right-message" : "left-message") +
         " message"
       }
     >
-      <span className="text">{text}</span>
+      <span className="text">{messageContent}</span>
       <span className="time">{"12:32pm"}</span>
     </div>
   );

@@ -3,15 +3,17 @@ import { db } from "../services/firestore";
 
 export async function getChat(chatId, setMessages) {
   console.log(chatId);
-  console.log("GEtting chat messages");
+  console.log("Getting chat messages");
 
-  const messages = [];
-  const chatQuery = query(collection(db, `chats/${chatId}/chat`));
+  let messages = [];
+  const chatQuery = query(collection(db, `chats/${chatId}/chats`));
   const unsubscribe = onSnapshot(chatQuery, (querySnapshot) => {
+    messages = [];
     querySnapshot.forEach((doc) => {
-      messages.push(doc.data());
+      messages.push({ ...doc.data(), messageId: doc.id });
     });
     setMessages(messages);
+    console.log(messages);
   });
   return unsubscribe;
 }

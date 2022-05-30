@@ -1,7 +1,9 @@
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../services/firestore";
-export async function getChatDetail(path) {
-  const response = await getDoc(doc(db, `chats/${path}/`));
+export default async function getChatDetail(chatId) {
+  console.log("getting chat details", chatId);
+
+  const response = await getDoc(doc(db, `chats/${chatId}`));
   console.log(response.data());
   return response.data();
 }

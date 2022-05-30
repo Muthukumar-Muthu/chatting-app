@@ -2,14 +2,13 @@ import "./style.css";
 import Chat from "../chat/Chat";
 
 const ChatList = ({ chatList, setShowChat }) => {
+  //get from chats
+  console.log(chatList);
+
   return (
     <div className="chat-list">
-      {chatList.map((chatObj, index) => (
-        <Chat
-          setShowChat={setShowChat}
-          key={index}
-          path={chatObj.withtestuser1}
-        />
+      {chatList.map((chatDetail) => (
+        <Chat key={chatDetail.docId} chatDetail={chatDetail} />
       ))}
     </div>
   );

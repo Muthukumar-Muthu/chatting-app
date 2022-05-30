@@ -5,9 +5,9 @@ import { getChat } from "../../firebase/functions/getChat";
 const ChatArea = ({ showChat }) => {
   const [messages, setMessages] = useState([]);
   useEffect(() => {
-    if (showChat.chatPath) {
-      getChat(showChat.chatPath, setMessages);
-    }
+    // if (showChat.chatPath) {
+    //   getChat(showChat.chatPath, setMessages);
+    // }
   }, [showChat]);
 
   return (

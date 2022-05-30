@@ -14,12 +14,12 @@ const Home = () => {
   const { user } = useContext(UserContext);
   useEffect(() => {
     if (user) {
-      // getUserDetailsFromDb(getUserId())
-      //   .then((response) => {
-      //     console.log(response);
-      //     setUserDetails(response);
-      //   })
-      //   .catch((err) => console.warn(err));
+      getUserDetailsFromDb(getUserId())
+        .then((response) => {
+          console.log(response);
+          setUserDetails(response);
+        })
+        .catch((err) => console.warn(err));
       getChatList(getUserId(), setChatList);
     }
   }, []);

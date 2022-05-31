@@ -1,0 +1,19 @@
+form.newChat {
+  display: flex;
+  flex-direction: column;
+  input {
+    margin-block: 1em;
+    display: inline;
+    border: thin solid lightgrey;
+    letter-spacing: normal;
+  }
+  label {
+    display: inline;
+  }
+  .button {
+    padding: 0.5em 1em;
+    margin-inline: auto;
+    cursor: pointer;
+    display: block;
+  }
+}

@@ -4,19 +4,21 @@ import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import BasicModal from "../modal/Modal";
 import "./style.css";
 const NewChat = () => {
-  const [chatId, setChatId] = useState(null);
-  function clickHandler() {
-    generateNewChat(getUserId())
-      .then((id) => {
-        setChatId(id);
-        console.log(id);
-      })
-      .catch((err) => console.warn(err));
-  }
+  const [openModal, setOpenModal] = useState(false);
+  const openModalFunction = () => setOpenModal(true);
+  // const [chatId, setChatId] = useState(null);
+  // function clickHandler() {
+  //   generateNewChat(getUserId())
+  //     .then((id) => {
+  //       setChatId(id);
+  //       console.log(id);
+  //     })
+  //     .catch((err) => console.warn(err));
+  // }
   return (
     <div className="new-chat">
-      <button onClick={clickHandler}>Create a new Chat</button>
-      <BasicModal content={chatId} />
+      <button onClick={openModalFunction}>Create a new Chat</button>
+      {openModal && <BasicModal content={""} setOpenModal={setOpenModal} />}
     </div>
   );
 };

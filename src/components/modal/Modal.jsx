@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Copyable from "../copyable/Copyable";
 import { Link } from "react-router-dom";
+import NewChatForm from "../newChatForm/NewChatForm";
 
 const style = {
   position: "absolute",
@@ -18,15 +19,13 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ content }) {
-  console.log("content", content);
-  const [open, setOpen] = React.useState(!!content);
+export default function BasicModal({ setOpenModal }) {
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  React.useEffect(() => {
-    if (content) handleOpen();
-  }, [content]);
+  const handleClose = () => {
+    setOpenModal(false);
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -37,18 +36,18 @@ export default function BasicModal({ content }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Share the Link at the bottom with your firend to start chat
+          <Typography
+            style={{
+              marginInline: "auto",
+            }}
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+          >
+            New Chat Form
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Copyable
-              content={
-                <Link target={"_blank"} to={`chat/${content}`}>
-                  {window.location.hostname + `/chat/${content}`}
-                </Link>
-              }
-              copyContent={window.location.hostname + `/chat/${content}`}
-            />
+            <NewChatForm handleClose={handleClose} />
           </Typography>
         </Box>
       </Modal>

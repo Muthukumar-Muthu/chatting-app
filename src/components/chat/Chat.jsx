@@ -30,7 +30,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
       </div>
       <div className="chat-details">
         <h2 className="chat-heading">{chat.chatName}</h2>
-        <p className="chat-msg">{trimMsg(chat.recentMsg, 30)}</p>
+        <p className="chat-msg">{trimMsg(chat.recentMsg, 25)}</p>
       </div>
       <div className="time">{lastMessageTime}</div>
     </div>

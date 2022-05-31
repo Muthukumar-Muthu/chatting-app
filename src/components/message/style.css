@@ -9,6 +9,8 @@
   max-width: 500px;
   word-wrap: break-word;
   border-radius: 7.5px;
+  overflow-wrap: normal;
+  overflow-wrap: break-word;
 }
 
 .message .time {
@@ -16,6 +18,14 @@
   margin-top: auto;
   margin-left: 0.5em;
   color: #667781;
+}
+
+.message .text {
+  overflow-wrap: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 400px;
+  padding: 0.2em;
 }
 
 .left-message {

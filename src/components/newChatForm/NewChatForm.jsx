@@ -8,6 +8,7 @@ import Copyable from "../copyable/Copyable";
 import "./style.css";
 const NewChatForm = ({ setOpenModal, openModal }) => {
   const [chatName, setChatName] = useState("");
+  const [chatAbout, setChatAbout] = useState("");
   const [cleanState, setCleanState] = useState(false);
   const [chatId, setChatId] = useState("");
   const [newChatDone, setNewChatDone] = useState(false);
@@ -27,11 +28,13 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
     if (cleanState === true) {
       setChatName("");
       setChatId("");
-      // chatImgRef.current.value = "";
+      // chatImgRef.current.files.file = null;
+      // chatImgRef.current.files.length = 0;
       setCleanState(false);
+      setChatAbout("");
     }
   }, [cleanState]);
-
+  // console.log(chatImgRef.current.files);
   useEffect(() => {
     if (openModal) {
       setCleanState(true);
@@ -41,9 +44,14 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   function changeHandlerForChatName(e) {
     setChatName(e.target.value);
   }
+  function changeHandlerForChatAbout(e) {
+    setChatAbout(e.target.value);
+  }
   function changeHandlerForChatPhoto(e) {
     // setChatPhoto(e.target.name);
     setImgUpload(true);
+    console.log(e.target.files);
+
     uploadChatPhotoToDb(e.target.files[0], `chats/${chatId}/chatImg`).then(
       (imgUrl) => {
         console.log(imgUrl);
@@ -55,11 +63,13 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   function submitHandler(e) {
     e.preventDefault();
     console.log(chatImgUrl);
-
-    if (chatImgUrl) {
-      updateChatDetail(chatId, chatName, chatImgUrl);
-      setNewChatDone(true);
-    }
+    if (chatId && chatName && chatImgUrl && chatAbout) {
+      if (chatImgUrl) {
+        console.log(`while submitting chatImgUrl ${chatImgUrl}`);
+        updateChatDetail(chatId, chatName, chatImgUrl, chatAbout);
+        setNewChatDone(true);
+      }
+    } else alert("fill all the fields for better experince");
   }
 
   return (
@@ -87,6 +97,20 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
               placeholder="Chat name"
               value={chatName}
               onChange={changeHandlerForChatName}
+              required
+              autoComplete="off"
+              autoCorrect="false"
+            />
+          </span>
+          <span className="flex">
+            <label htmlFor="chat-name">Chat About</label>
+            <input
+              type="text"
+              name="Chat about"
+              id="chat-about"
+              placeholder="This chat is about..."
+              value={chatAbout}
+              onChange={changeHandlerForChatAbout}
               required
               autoComplete="off"
               autoCorrect="false"

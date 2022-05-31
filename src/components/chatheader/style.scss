@@ -22,16 +22,18 @@
   .settings {
     border: none;
     cursor: pointer;
-    padding: 0.5em;
+    margin-inline: 0.5em;
     background: inherit;
   }
   .profile-picture {
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
   }
   img {
     border-radius: 50%;
     height: 100%;
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    object-position: center;
+    cursor: pointer;
   }
 }

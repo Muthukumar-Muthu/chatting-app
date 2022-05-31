@@ -8,7 +8,12 @@
   margin-inline: 0.5em;
   border-bottom: 1px solid lightgrey;
   .chat-image {
-    width: 45px;
+    img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+      object-position: center;
+    }
   }
   .chat-details {
     margin-right: auto;

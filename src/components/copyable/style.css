@@ -10,6 +10,8 @@
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  padding: 1em;
+  min-height: 200px;
 }
 
 .copy-element .copy-button {
@@ -20,6 +22,7 @@
   font-size: medium;
   font-weight: bold;
   padding: 0.5em 1em;
+  margin-inline: 1em 2em;
   border-radius: 5px;
   cursor: pointer;
   display: block;

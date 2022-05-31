@@ -34,18 +34,19 @@
 .chat-header .settings {
   border: none;
   cursor: pointer;
-  padding: 0.5em;
+  margin-inline: 0.5em;
   background: inherit;
-}
-
-.chat-header .profile-picture {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
 }
 
 .chat-header img {
   border-radius: 50%;
   height: 100%;
+  width: 45px;
+  height: 45px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

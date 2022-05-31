@@ -1,20 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import generateNewChat from "../../firebase/functions/generateNewChat";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import updateChatDetail from "../../firebase/functions/UpdateChatDetail";
 import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
 import "./style.css";
-const NewChatForm = ({ handleClose }) => {
+const NewChatForm = ({ setOpenModal }) => {
   const [chatName, setChatName] = useState("");
+  const [cleanState, setCleanState] = useState(false);
   const [chatId, setChatId] = useState("");
-  const [chatPhoto, setChatPhoto] = useState("");
-
+  const chatImgRef = useRef();
   let chatImgUrl = "";
   useEffect(() => {
     generateNewChat(getUserId())
       .then((id) => setChatId(id))
       .catch((err) => console.warn(err));
   }, []);
+
+  useEffect(() => {
+    if (cleanState === true) {
+      setChatName("");
+      setChatId("");
+      chatImgRef.current.value = "";
+      setCleanState(false);
+    }
+  }, [cleanState]);
 
   function changeHandlerForChatName(e) {
     setChatName(e.target.value);
@@ -27,11 +36,11 @@ const NewChatForm = ({ handleClose }) => {
   }
   function submitHandler(e) {
     e.preventDefault();
-    console.log(chatImgUrl);
-
     updateChatDetail(chatId, chatName, chatImgUrl);
-    handleClose();
+    setOpenModal(false);
+    setCleanState(true);
   }
+
   return (
     <form className="newChat">
       <span className="flex">
@@ -51,6 +60,7 @@ const NewChatForm = ({ handleClose }) => {
       <span className="flex">
         <label htmlFor="chat-photo">Chat Photo</label>
         <input
+          ref={chatImgRef}
           type="file"
           name="Chat Photo"
           id="chat-photo"
@@ -60,9 +70,9 @@ const NewChatForm = ({ handleClose }) => {
           required
         />
       </span>
-      <span className="button" onClick={submitHandler}>
+      <button className="submit-button" onClick={submitHandler}>
         Submit
-      </span>
+      </button>
     </form>
   );
 };

@@ -9,7 +9,8 @@ export default function getChatListHeight() {
     .querySelector(".search-bar")
     ?.getBoundingClientRect().height;
 
-  const chatListHeight = leftsideHeight - (headerHeight + searchBarHeight + 40);
+  const chatListHeight =
+    leftsideHeight - (headerHeight + searchBarHeight + 100);
 
   return chatListHeight;
 }

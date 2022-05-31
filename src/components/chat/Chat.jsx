@@ -21,7 +21,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
     <div
       className="chat"
       style={{
-        backgroundColor: showChat.chatId === chatId ? "#f0f2f5" : "white",
+        backgroundColor: showChat.chatId === chatId ? "#f0f2f5" : "",
       }}
       onClick={clickHandler}
     >

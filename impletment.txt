@@ -1,8 +1,0 @@
- <Copyable
-              content={
-                <Link target={"_blank"} to={`chat/${content}`}>
-                  {window.location.hostname + `/chat/${content}`}
-                </Link>
-              }
-              copyContent={window.location.hostname + `/chat/${content}`}
-            />

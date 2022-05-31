@@ -11,4 +11,17 @@
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
+
+.copy-element .copy-button {
+  width: auto;
+  height: auto;
+  background-color: #14bde4;
+  color: white;
+  font-size: medium;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+}
 /*# sourceMappingURL=style.css.map */

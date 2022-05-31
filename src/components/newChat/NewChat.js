@@ -20,7 +20,9 @@ const NewChat = () => {
     <div className="new-chat">
       <button onClick={() => setOpenModal(true)}>Create a new Chat</button>
       <BasicModal
-        component={<NewChatForm setOpenModal={setOpenModal} />}
+        component={
+          <NewChatForm openModal={openModal} setOpenModal={setOpenModal} />
+        }
         openModal={openModal}
         setOpenModal={setOpenModal}
       />

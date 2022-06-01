@@ -3,18 +3,18 @@ import "./style.css";
 import copyToClipBoard from "../../functions/copyToClipBoard";
 const Copyable = ({ content, copyContent }) => {
   const [copied, setCopied] = useState(false);
-  console.log(copyContent);
 
   return (
-    <span className="copy-element">
+    <span style={{ height: "100%", width: "100%" }} className="copy-element">
       {content}
-      <span
+      <button
+        className="copy-button"
         onClick={() => {
           copyToClipBoard(copyContent).then((response) => setCopied(response));
         }}
       >
         {copied ? "copied" : "copy"}
-      </span>
+      </button>
     </span>
   );
 };

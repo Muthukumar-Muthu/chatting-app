@@ -1,15 +1,11 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../services/firestore";
 
-export default async function setNewChat(
-  uid,
-  chatName = "Defualt chat name",
-  chatImg = null
-) {
+export default async function setNewChat(uid, chatName = null, chatImg = null) {
   const response = await addDoc(collection(db, `chats`), {
     chatImg: chatImg,
     chatName: chatName,
-    recentMsg: "default recent message",
+    recentMsg: "",
     createdAt: serverTimestamp(),
     createdBy: uid,
     lastUpdateTime: serverTimestamp(),

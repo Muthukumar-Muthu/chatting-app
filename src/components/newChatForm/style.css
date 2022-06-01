@@ -6,6 +6,7 @@ form.newChat {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 1em;
 }
 
 form.newChat input {
@@ -15,11 +16,19 @@ form.newChat input {
   letter-spacing: normal;
 }
 
+form.newChat input[type="file"] {
+  font-size: medium;
+}
+
 form.newChat label {
   display: inline;
 }
 
-form.newChat .button {
+form.newChat .submit-button {
+  background-color: #14bde4;
+  color: white;
+  font-size: large;
+  font-weight: bold;
   padding: 0.5em 1em;
   margin-inline: auto;
   cursor: pointer;

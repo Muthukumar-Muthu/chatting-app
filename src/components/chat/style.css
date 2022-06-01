@@ -16,8 +16,13 @@
   border-bottom: 1px solid lightgrey;
 }
 
-.chat .chat-image {
+.chat .chat-image img {
   width: 45px;
+  height: 45px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .chat .chat-details {
@@ -30,6 +35,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 60%;
 }
 
 .chat .chat-heading {
@@ -39,8 +45,11 @@
 }
 
 .chat .chat-msg {
+  width: 100%;
   color: grey;
   margin-block: auto;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .chat img {
@@ -51,6 +60,9 @@
 .chat .time {
   color: grey;
   font-size: small;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
 }
 
 .chat:hover {

@@ -1,16 +1,25 @@
 form.newChat {
   display: flex;
   flex-direction: column;
+  padding: 1em;
+
   input {
     margin-block: 1em;
     display: inline;
     border: thin solid lightgrey;
     letter-spacing: normal;
   }
+  input[type="file"] {
+    font-size: medium;
+  }
   label {
     display: inline;
   }
-  .button {
+  .submit-button {
+    background-color: #14bde4;
+    color: white;
+    font-size: large;
+    font-weight: bold;
     padding: 0.5em 1em;
     margin-inline: auto;
     cursor: pointer;

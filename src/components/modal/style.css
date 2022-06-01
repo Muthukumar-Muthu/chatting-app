@@ -1,12 +1,44 @@
 .modal-wrapper {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   overflow: hidden;
-  background-color: #b5b3b3;
-  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.5);
   display: -ms-grid;
   display: grid;
   place-items: center;
+  z-index: 2;
+}
+
+.modal-wrapper > * {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.modal-wrapper .modal {
+  position: relative;
+  background-color: white;
+  opacity: 1;
+  z-index: 3;
+  color: black;
+  border-radius: 20px;
+  width: 422.7px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  border: none;
+}
+
+.modal-wrapper .close-button {
+  cursor: pointer;
+  color: red;
+  font-size: large;
+  position: absolute;
+  top: 0;
+  right: 010px;
+}
+
+.modal-wrapper svg {
+  font-size: 50px;
 }
 /*# sourceMappingURL=style.css.map */

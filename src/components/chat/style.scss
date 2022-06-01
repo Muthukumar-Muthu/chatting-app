@@ -8,13 +8,19 @@
   margin-inline: 0.5em;
   border-bottom: 1px solid lightgrey;
   .chat-image {
-    width: 45px;
+    img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+      object-position: center;
+    }
   }
   .chat-details {
     margin-right: auto;
     margin-left: 1em;
     display: flex;
     flex-direction: column;
+    width: 60%;
   }
   .chat-heading {
     margin-block: auto;
@@ -22,8 +28,11 @@
     font-weight: normal;
   }
   .chat-msg {
+    width: 100%;
     color: grey;
     margin-block: auto;
+    white-space: nowrap;
+    overflow: hidden;
   }
   img {
     width: 100%;
@@ -32,6 +41,8 @@
   .time {
     color: grey;
     font-size: small;
+    display: grid;
+    place-items: center;
   }
 }
 

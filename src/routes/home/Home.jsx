@@ -11,6 +11,7 @@ const Home = () => {
   const [chatList, setChatList] = useState([]);
   const [showChat, setShowChat] = useState({});
   const [userDetails, setUserDetails] = useState({});
+  const [chatListLoaded, setChatListLoaded] = useState(false);
   const { user } = useContext(UserContext);
   useEffect(() => {
     if (user) {
@@ -20,7 +21,7 @@ const Home = () => {
           setUserDetails(response);
         })
         .catch((err) => console.warn(err));
-      getChatList(getUserId(), setChatList);
+      getChatList(getUserId(), setChatList).then(() => setChatListLoaded(true));
     }
   }, []);
   return (
@@ -28,6 +29,7 @@ const Home = () => {
       {user ? (
         <>
           <LeftBar
+            chatListLoaded={chatListLoaded}
             showChat={showChat}
             setShowChat={setShowChat}
             chatList={chatList}

@@ -7,8 +7,9 @@ const ChatPage = () => {
   console.log("chat Page");
   const navigate = useNavigate();
   function callBack() {
-    joinChat(getUserId(), chatId);
-    navigate("/");
+    console.log(`joining chat`);
+
+    joinChat(getUserId(), chatId).then(navigate("/"));
   }
   return (
     <div>

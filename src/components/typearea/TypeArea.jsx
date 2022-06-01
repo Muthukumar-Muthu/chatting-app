@@ -1,13 +1,14 @@
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import sendMessage from "../../firebase/functions/sendMessage";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import "./style.css";
 const TypeArea = ({ showChat }) => {
   const { chatId } = showChat;
   const [typedMessage, setTypedMessage] = useState("");
-  console.log(typedMessage);
-
+  useEffect(() => {
+    setTypedMessage("");
+  }, [showChat]);
   return (
     <footer className="type-area">
       <input

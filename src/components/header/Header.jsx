@@ -1,7 +1,7 @@
 import "./style.css";
 
-import ThreeDots from "../ThreeDots";
 import { getUserPhotoUrl } from "../../firebase/functions/getUserDetailsFromAuth";
+import UserSettings from "../user-settings/UserSettings";
 const Header = () => {
   return (
     <div className="header">
@@ -10,7 +10,7 @@ const Header = () => {
       </div>
 
       <button className="settings">
-        <ThreeDots />
+        <UserSettings />
       </button>
     </div>
   );

@@ -5,9 +5,13 @@ import ChatHeader from "../chatheader/ChatHeader";
 const RightBar = ({ showChat }) => {
   return (
     <section className="rightbar">
-      <ChatHeader showChat={showChat} />
-      <ChatArea showChat={showChat} />
-      <TypeArea showChat={showChat} />
+      {showChat.chatName && (
+        <>
+          <ChatHeader showChat={showChat} />
+          <ChatArea showChat={showChat} />
+          <TypeArea showChat={showChat} />
+        </>
+      )}
     </section>
   );
 };

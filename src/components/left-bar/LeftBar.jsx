@@ -6,7 +6,7 @@ import ChatList from "../chat-list/ChatList";
 import getChatListHeight from "../../functions/getChatListHeight";
 import NewChat from "../newChat/NewChat";
 
-const LeftBar = ({ setShowChat, chatList, showChat }) => {
+const LeftBar = ({ setShowChat, chatList, showChat, chatListLoaded }) => {
   const [chatListHeight, setChatListHeight] = useState(0);
   useEffect(() => {
     setChatListHeight(getChatListHeight());
@@ -22,11 +22,15 @@ const LeftBar = ({ setShowChat, chatList, showChat }) => {
         }}
         className="chatlist-wrapper"
       >
-        <ChatList
-          showChat={showChat}
-          chatList={chatList}
-          setShowChat={setShowChat}
-        />
+        {chatListLoaded ? (
+          <ChatList
+            showChat={showChat}
+            chatList={chatList}
+            setShowChat={setShowChat}
+          />
+        ) : (
+          <h2>Loading </h2>
+        )}
       </div>
     </section>
   );

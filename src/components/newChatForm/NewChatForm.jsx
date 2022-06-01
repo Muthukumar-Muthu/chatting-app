@@ -14,9 +14,12 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   const [newChatDone, setNewChatDone] = useState(false);
   const [imgUpload, setImgUpload] = useState(null);
   const [chatImgUrl, setChatImgUrl] = useState("");
-  const chatImgRef = useRef();
+  const chatImgRef = useRef(null);
+  const chatNameRef = useRef(null);
+
   useEffect(() => {
     if (openModal) {
+      chatNameRef.current?.focus();
       console.log("running new chat");
       generateNewChat(getUserId())
         .then((id) => setChatId(id))
@@ -61,6 +64,8 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
     );
   }
   function submitHandler(e) {
+    console.log("submtting");
+
     e.preventDefault();
     console.log(chatImgUrl);
     if (chatId && chatName && chatImgUrl && chatAbout) {
@@ -69,7 +74,10 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
         updateChatDetail(chatId, chatName, chatImgUrl, chatAbout);
         setNewChatDone(true);
       }
-    } else alert("fill all the fields for better experince");
+    } else {
+      alert("fill all the fields for better experince");
+      console.warn(chatImgRef, chatName, chatAbout, chatId);
+    }
   }
 
   return (
@@ -91,6 +99,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
           <span className="flex">
             <label htmlFor="chat-name">Chat name</label>
             <input
+              ref={chatNameRef}
               type="text"
               name="Chat name"
               id="chat-name"
@@ -118,7 +127,19 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
           </span>
           <span className="flex">
             <label htmlFor="chat-photo">
-              Chat Photo {imgUpload && <span>Uploading..</span>}
+              Chat Photo
+              {imgUpload && (
+                <span
+                  style={{
+                    backgroundColor: "red",
+                    fontSize: "medium",
+                    color: "black",
+                    padding: "0.2em",
+                  }}
+                >
+                  Uploading..
+                </span>
+              )}
             </label>
             <input
               ref={chatImgRef}
@@ -131,7 +152,12 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
               required
             />
           </span>
-          <button className="submit-button" onClick={submitHandler}>
+
+          <button
+            type="submit"
+            className="submit-button"
+            onClick={submitHandler}
+          >
             Submit
           </button>
         </form>

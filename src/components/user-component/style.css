@@ -1,0 +1,140 @@
+.user-component {
+  height: 100%;
+  background-color: #f0f2f5;
+}
+
+.user-component header {
+  background-color: #008069;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 3em 2em 0.5em 1.2em;
+  font-size: 19px;
+  color: white;
+  font-weight: 500;
+}
+
+.user-component header .back-arrow {
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.user-component header svg {
+  color: white;
+}
+
+.user-component .user-photo {
+  margin-block: 2em;
+  min-height: 250px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.user-component .user-photo div {
+  position: relative;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.user-component .user-photo img {
+  height: 100%;
+  border-radius: 50%;
+}
+
+.user-component .img-cover {
+  position: absolute;
+  background-color: rgba(102, 109, 112, 0.8);
+  inset: 0;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-transform: uppercase;
+  padding: 2em;
+  text-align: center;
+  color: white;
+  font-size: small;
+  cursor: pointer;
+}
+
+.user-component .img-cover span {
+  margin-block: 0.5em;
+}
+
+.user-component .img-cover svg {
+  color: lightgrey;
+}
+
+.user-component .inputs {
+  background-color: white;
+}
+
+.user-component .inputs > * {
+  padding-block: 0.5em;
+}
+
+.user-component .inputs label {
+  display: block;
+  font-size: small;
+  padding: 1em;
+  color: #008069;
+}
+
+.user-component .inputs label,
+.user-component .inputs input {
+  padding: 1em 1em 0.5em 1em;
+}
+
+.user-component .inputs input[type="text"] {
+  padding-top: 0;
+  background-color: white;
+  border: none;
+  font-size: large;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.user-component .inputs input:focus,
+.user-component .inputs input:focus-visible {
+  border: none;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-bottom: thin solid #008069;
+}
+
+.user-component .inputs svg {
+  color: grey;
+  padding: none;
+}
+
+.user-component .inputs .values {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.user-component .inputs .edit-button {
+  margin-left: auto;
+  margin-right: 2em;
+  cursor: pointer;
+}
+
+.user-component p {
+  padding: 1em;
+  font-size: medium;
+  color: grey;
+  line-height: 1.5em;
+}
+/*# sourceMappingURL=style.css.map */

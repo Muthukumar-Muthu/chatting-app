@@ -2,10 +2,15 @@ import "./style.css";
 
 import { getUserPhotoUrl } from "../../firebase/functions/getUserDetailsFromAuth";
 import UserSettings from "../user-settings/UserSettings";
-const Header = () => {
+const Header = ({ setShowUser }) => {
   return (
     <div className="header">
-      <div className="profile-picture">
+      <div
+        onClick={() => {
+          setShowUser((p) => !p);
+        }}
+        className="profile-picture"
+      >
         <img src={getUserPhotoUrl()} alt="" />
       </div>
 

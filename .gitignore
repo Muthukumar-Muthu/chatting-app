@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 local Emulator.txt
 
+firebase-debug.log

@@ -13,7 +13,9 @@ export default async function updateChatDetail(
       chatAbout: chatAbout,
       chatImg: chatImgUrl,
     });
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 }

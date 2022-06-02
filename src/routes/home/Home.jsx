@@ -23,7 +23,7 @@ const Home = () => {
         .catch((err) => console.warn(err));
       getChatList(getUserId(), setChatList).then(() => setChatListLoaded(true));
     }
-  }, []);
+  }, [user]);
   return (
     <div className="App">
       {user ? (

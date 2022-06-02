@@ -9,13 +9,15 @@ const NewChat = () => {
   return (
     <div className="new-chat">
       <button onClick={() => setOpenModal(true)}>Create a new Chat</button>
-      <BasicModal
-        component={
-          <NewChatForm openModal={openModal} setOpenModal={setOpenModal} />
-        }
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-      />
+      {openModal && (
+        <BasicModal
+          component={
+            <NewChatForm openModal={openModal} setOpenModal={setOpenModal} />
+          }
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
+      )}
     </div>
   );
 };

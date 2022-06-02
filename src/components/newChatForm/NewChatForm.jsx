@@ -9,13 +9,15 @@ import "./style.css";
 const NewChatForm = ({ setOpenModal, openModal }) => {
   const [chatName, setChatName] = useState("");
   const [chatAbout, setChatAbout] = useState("");
-  const [cleanState, setCleanState] = useState(false);
-  const [chatId, setChatId] = useState("");
-  const [newChatDone, setNewChatDone] = useState(false);
-  const [imgUpload, setImgUpload] = useState(null);
+  const [chatImg, setChatImg] = useState(null);
   const [chatImgUrl, setChatImgUrl] = useState("");
-  const chatImgRef = useRef(null);
+  const [chatId, setChatId] = useState("");
+  const [imgUploading, setImgUploading] = useState(false);
+  const [newChatDone, setNewChatDone] = useState(false);
+  const [error, setError] = useState(false);
   const chatNameRef = useRef(null);
+  const chatImgRef = useRef(null);
+  console.log(chatImg);
 
   useEffect(() => {
     if (openModal) {
@@ -26,24 +28,16 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
         .catch((err) => console.warn(err));
     }
   }, [openModal]);
-
   useEffect(() => {
-    if (cleanState === true) {
-      setChatName("");
-      setChatId("");
-      // chatImgRef.current.files.file = null;
-      // chatImgRef.current.files.length = 0;
-      setCleanState(false);
-      setChatAbout("");
+    console.log(chatImgUrl);
+    if (chatImgUrl) {
+      setError(true);
+      console.log(`while submitting chatImgUrl ${chatImgUrl}`);
+      updateChatDetail(chatId, chatName, chatImgUrl, chatAbout).then(
+        setNewChatDone(true)
+      );
     }
-  }, [cleanState]);
-  // console.log(chatImgRef.current.files);
-  useEffect(() => {
-    if (openModal) {
-      setCleanState(true);
-      setNewChatDone(false);
-    }
-  }, [openModal]);
+  }, [chatImgUrl]);
   function changeHandlerForChatName(e) {
     setChatName(e.target.value);
   }
@@ -51,35 +45,24 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
     setChatAbout(e.target.value);
   }
   function changeHandlerForChatPhoto(e) {
-    // setChatPhoto(e.target.name);
-    setImgUpload(true);
-    console.log(e.target.files);
-
-    uploadChatPhotoToDb(e.target.files[0], `chats/${chatId}/chatImg`).then(
-      (imgUrl) => {
-        console.log(imgUrl);
-        setChatImgUrl(imgUrl);
-        setImgUpload(false);
-      }
-    );
+    setChatImg(e.target.files[0]);
   }
   function submitHandler(e) {
-    console.log("submtting");
-
+    setError(false);
+    console.log("submitting chat Details");
     e.preventDefault();
-    console.log(chatImgUrl);
-    if (chatId && chatName && chatImgUrl && chatAbout) {
-      if (chatImgUrl) {
-        console.log(`while submitting chatImgUrl ${chatImgUrl}`);
-        updateChatDetail(chatId, chatName, chatImgUrl, chatAbout);
-        setNewChatDone(true);
-      }
-    } else {
-      alert("fill all the fields for better experince");
-      console.warn(chatImgRef, chatName, chatAbout, chatId);
+    if (!(chatId && chatImg && chatAbout)) {
+      console.log("not submitting");
+      setError(true);
+      return;
     }
+    setImgUploading(true);
+    uploadChatPhotoToDb(chatImg, `chats/${chatId}/chatImg`).then((imgUrl) => {
+      console.log(imgUrl);
+      setChatImgUrl(imgUrl);
+      setImgUploading(false);
+    });
   }
-
   return (
     <>
       {newChatDone ? (
@@ -99,6 +82,9 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
           <span className="flex">
             <label htmlFor="chat-name">Chat name</label>
             <input
+              style={{
+                border: error ? "thin solid red" : "",
+              }}
               ref={chatNameRef}
               type="text"
               name="Chat name"
@@ -114,6 +100,9 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
           <span className="flex">
             <label htmlFor="chat-name">Chat About</label>
             <input
+              style={{
+                border: error ? "thin solid red" : "",
+              }}
               type="text"
               name="Chat about"
               id="chat-about"
@@ -128,7 +117,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
           <span className="flex">
             <label htmlFor="chat-photo">
               Chat Photo
-              {imgUpload && (
+              {imgUploading && (
                 <span
                   style={{
                     backgroundColor: "red",
@@ -137,17 +126,19 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
                     padding: "0.2em",
                   }}
                 >
-                  Uploading..
+                  Uploading...
                 </span>
               )}
             </label>
             <input
+              style={{
+                border: error ? "thin solid red" : "",
+              }}
               ref={chatImgRef}
               type="file"
               name="Chat Photo"
               id="chat-photo"
               accept="image/png, image/jpeg"
-              //   value={chatPhoto}
               onChange={changeHandlerForChatPhoto}
               required
             />

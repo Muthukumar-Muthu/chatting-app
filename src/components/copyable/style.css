@@ -1,5 +1,4 @@
 .copy-element {
-  border: 1px solid lightgrey;
   padding: 0.25em;
   font-size: small;
   display: -webkit-box;
@@ -10,8 +9,8 @@
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  padding: 1em;
-  min-height: 200px;
+  padding: 0.5em;
+  padding-left: 1em;
 }
 
 .copy-element .copy-button {
@@ -22,7 +21,7 @@
   font-size: medium;
   font-weight: bold;
   padding: 0.5em 1em;
-  margin-inline: 1em 2em;
+  margin-inline: 2em;
   border-radius: 5px;
   cursor: pointer;
   display: block;

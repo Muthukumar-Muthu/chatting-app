@@ -16,6 +16,7 @@
 }
 
 .modal-wrapper .modal {
+  min-height: 200px;
   border-radius: 10px;
   position: relative;
   background-color: #f0f2f5;

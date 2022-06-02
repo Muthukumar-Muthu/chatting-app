@@ -21,6 +21,17 @@ form.newChat input[type="file"] {
   font-size: medium;
 }
 
+form.newChat input {
+  width: 100%;
+  display: block;
+  margin-inline: auto;
+  padding: 0.5em;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: large;
+}
+
 form.newChat label {
   display: inline;
 }

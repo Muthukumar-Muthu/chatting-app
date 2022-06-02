@@ -1,28 +1,28 @@
-form {
+footer form {
   margin-top: auto;
   background-color: #f0f2f5;
   padding: 0.5em;
   display: flex;
   align-items: center;
-}
-input {
-  width: 90%;
-  display: block;
-  margin-inline: auto;
-  padding: 0.5em;
-  border: none;
-  border-radius: 10px;
-  background-color: #ffffff;
-  font-size: large;
-  letter-spacing: 1px;
-}
-.send-button {
-  padding: 1em;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
+  input {
+    width: 90%;
+    display: block;
+    margin-inline: auto;
+    padding: 0.5em;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: large;
+    letter-spacing: 1px;
+  }
+  .send-button {
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
 
-  svg {
-    color: #54656f;
+    svg {
+      color: #54656f;
+    }
   }
 }

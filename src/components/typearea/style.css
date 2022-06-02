@@ -1,4 +1,4 @@
-form {
+footer form {
   margin-top: auto;
   background-color: #f0f2f5;
   padding: 0.5em;
@@ -10,7 +10,7 @@ form {
           align-items: center;
 }
 
-input {
+footer form input {
   width: 90%;
   display: block;
   margin-inline: auto;
@@ -22,14 +22,14 @@ input {
   letter-spacing: 1px;
 }
 
-.send-button {
+footer form .send-button {
   padding: 1em;
   border: none;
   cursor: pointer;
   border-radius: 10px;
 }
 
-.send-button svg {
+footer form .send-button svg {
   color: #54656f;
 }
 /*# sourceMappingURL=style.css.map */

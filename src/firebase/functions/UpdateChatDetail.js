@@ -1,16 +1,9 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firestore";
 
-export default async function updateChatDetail(
-  chatId,
-  chatName,
-  chatImgUrl,
-  chatAbout
-) {
+export default async function updateChatDetail(chatId, chatImgUrl) {
   try {
     await updateDoc(doc(db, `chats/${chatId}`), {
-      chatName: chatName,
-      chatAbout: chatAbout,
       chatImg: chatImgUrl,
     });
     return true;

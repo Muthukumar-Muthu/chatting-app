@@ -2,18 +2,16 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import generateNewChat from "../../firebase/functions/generateNewChat";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
-import updateChatDetail from "../../firebase/functions/UpdateChatDetail";
-import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
+
 import Copyable from "../copyable/Copyable";
 import "./style.css";
 const NewChatForm = ({ setOpenModal, openModal }) => {
   const [chatName, setChatName] = useState("");
   const [chatAbout, setChatAbout] = useState("");
   const [chatImg, setChatImg] = useState(null);
-  const [chatImgUrl, setChatImgUrl] = useState("");
   const [chatId, setChatId] = useState("");
-  const [imgUploading, setImgUploading] = useState(false);
-  const [newChatDone, setNewChatDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState(false);
   const chatNameRef = useRef(null);
   const chatImgRef = useRef(null);
@@ -23,25 +21,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
       setTimeout(() => setError(false), 1000);
     }
   }, [error]);
-  useEffect(() => {
-    if (openModal) {
-      chatNameRef.current?.focus();
-      console.log("running new chat");
-      generateNewChat(getUserId())
-        .then((id) => setChatId(id))
-        .catch((err) => console.warn(err));
-    }
-  }, [openModal]);
-  useEffect(() => {
-    console.log(chatImgUrl);
-    if (chatImgUrl) {
-      setError(true);
-      console.log(`while submitting chatImgUrl ${chatImgUrl}`);
-      updateChatDetail(chatId, chatName, chatImgUrl, chatAbout).then(
-        setNewChatDone(true)
-      );
-    }
-  }, [chatImgUrl]);
+
   function changeHandlerForChatName(e) {
     setChatName(e.target.value);
   }
@@ -51,25 +31,22 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   function changeHandlerForChatPhoto(e) {
     setChatImg(e.target.files[0]);
   }
-  function submitHandler(e) {
-    setError(false);
-    console.log("submitting chat Details");
+  async function submitHandler(e) {
     e.preventDefault();
-    if (!(chatId && chatImg && chatAbout)) {
-      console.log("not submitting");
+    setError(false);
+    setLoading(true);
+    console.log("submitting chat Details");
+    if (!(chatName && chatAbout && chatImg)) {
       setError(true);
       return;
     }
-    setImgUploading(true);
-    uploadChatPhotoToDb(chatImg, `chats/${chatId}/chatImg`).then((imgUrl) => {
-      console.log(imgUrl);
-      setChatImgUrl(imgUrl);
-      setImgUploading(false);
-    });
+    const id = await generateNewChat(getUserId(), chatName, chatAbout, chatImg);
+    setChatId(id);
+    setLoading(false);
   }
   return (
     <>
-      {newChatDone ? (
+      {chatId ? (
         <Copyable
           content={
             <div>
@@ -119,21 +96,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
             />
           </span>
           <span className="flex">
-            <label htmlFor="chat-photo">
-              Chat Photo
-              {imgUploading && (
-                <span
-                  style={{
-                    backgroundColor: "red",
-                    fontSize: "medium",
-                    color: "black",
-                    padding: "0.2em",
-                  }}
-                >
-                  Uploading...
-                </span>
-              )}
-            </label>
+            <label htmlFor="chat-photo">Chat Photo</label>
             <input
               style={{
                 border: error ? "thin solid red" : "",
@@ -152,7 +115,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
             className="submit-button"
             onClick={submitHandler}
           >
-            Submit
+            Submit {loading && <span>Loading...</span>}
           </button>
         </form>
       )}

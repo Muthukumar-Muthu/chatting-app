@@ -9,7 +9,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
   const [chat, setChat] = useState({});
 
   const [date, time] = timeStampToDate(chat.lastUpdateTime);
-  console.log(chatId, "in chat component");
+
   useEffect(() => {
     getChatDetail(chatId, setChat);
   }, []);

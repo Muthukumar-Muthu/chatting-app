@@ -7,6 +7,7 @@ form.newChat {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 1em;
+  border-radius: 20px;
 }
 
 form.newChat input {
@@ -33,5 +34,10 @@ form.newChat .submit-button {
   margin-inline: auto;
   cursor: pointer;
   display: block;
+  max-width: 250px;
+}
+
+form.newChat span.flex {
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */

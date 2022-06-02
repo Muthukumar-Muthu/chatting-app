@@ -18,7 +18,11 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   const chatNameRef = useRef(null);
   const chatImgRef = useRef(null);
   console.log(chatImg);
-
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(false), 1000);
+    }
+  }, [error]);
   useEffect(() => {
     if (openModal) {
       chatNameRef.current?.focus();
@@ -143,7 +147,6 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
               required
             />
           </span>
-
           <button
             type="submit"
             className="submit-button"

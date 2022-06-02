@@ -14,8 +14,9 @@
     color: white;
   }
   .modal {
+    border-radius: 10px;
     position: relative;
-    background-color: white;
+    background-color: #f0f2f5;
     opacity: 1;
     z-index: 3;
     color: black;
@@ -25,6 +26,7 @@
     display: grid;
     place-items: center;
     border: none;
+    padding-top: 2em;
   }
   .close-button {
     cursor: pointer;

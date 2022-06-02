@@ -2,7 +2,7 @@ form.newChat {
   display: flex;
   flex-direction: column;
   padding: 1em;
-
+  border-radius: 20px;
   input {
     margin-block: 1em;
     display: inline;
@@ -24,5 +24,9 @@ form.newChat {
     margin-inline: auto;
     cursor: pointer;
     display: block;
+    max-width: 250px;
+  }
+  span.flex {
+    width: 100%;
   }
 }

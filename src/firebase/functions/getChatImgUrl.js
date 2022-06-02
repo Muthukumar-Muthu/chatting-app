@@ -7,7 +7,7 @@ export async function getChatImgUrl(path) {
     console.assert(response);
     return response;
   } catch (error) {
-    console.warn(error);
+    console.warn("null path for chatImg");
     return noUserPhoto;
   }
 }

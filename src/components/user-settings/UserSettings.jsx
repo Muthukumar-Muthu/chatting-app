@@ -1,4 +1,6 @@
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/services/auth";
 import DropDown from "../drop-down/DropDown";
 const UserSettings = () => {
   return (
@@ -6,11 +8,11 @@ const UserSettings = () => {
       parent={<MoreVertIcon />}
       child={
         <ul>
-          <li>New Group</li>
-          <li>Archived</li>
-          <li>Starred Message</li>
-          <li>Settings</li>
-          <li>Logout</li>
+          <li id="incomplete">New Group</li>
+          <li id="incomplete">Archived</li>
+          <li id="incomplete">Starred Message</li>
+          <li id="incomplete">Settings</li>
+          <li onClick={() => signOut(auth)}>Logout</li>
         </ul>
       }
     />

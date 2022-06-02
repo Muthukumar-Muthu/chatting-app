@@ -5,11 +5,14 @@ const DropDown = ({ parent, child }) => {
 
   useEffect(() => {
     const appWrapper = document.querySelector(".App-container");
-    appWrapper.addEventListener("click", (e) => {
+    const clickListner = (e) => {
       console.log(e.target);
-
       setShow(false);
-    });
+    };
+    appWrapper.addEventListener("click", clickListner);
+    return () => {
+      appWrapper.removeEventListener("click", clickListner);
+    };
   }, []);
   console.log(show);
   return (

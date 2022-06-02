@@ -1,4 +1,8 @@
 svg {
   color: grey;
 }
+
+#incomplete {
+  cursor: not-allowed;
+}
 /*# sourceMappingURL=global.css.map */

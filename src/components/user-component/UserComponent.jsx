@@ -5,19 +5,30 @@ import DoneIcon from "@mui/icons-material/Done";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { useEffect, useState, useRef } from "react";
 import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
-import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
+import {
+  getUserId,
+  getUserPhotoUrl,
+} from "../../firebase/functions/getUserDetailsFromAuth";
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/services/firestore";
+import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
+import { getChatImgUrl } from "../../firebase/functions/getChatImgUrl";
+import UserPhoto from "../../assests/user-photo.jpeg";
 const UserComponent = ({ setShowUser }) => {
   const [imgHover, setImgHover] = useState(false);
   const [aboutEditing, setAboutEditing] = useState(false);
   const [nameEditing, setNameEditing] = useState(false);
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
-  const [userDetails, setUserDetails] = useState({ name: "", about: "" });
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    about: "",
+    userImg: "",
+  });
+  const [profilePicUrl, setProfilePicUrl] = useState("");
   const nameRef = useRef(null);
   const aboutRef = useRef(null);
-
+  console.log(userDetails);
   useEffect(() => {
     let unsub = "";
     getUserDetailsFromDb(getUserId(), setUserDetails).then(
@@ -27,6 +38,11 @@ const UserComponent = ({ setShowUser }) => {
   }, []);
   console.log(aboutEditing);
 
+  useEffect(() => {
+    getChatImgUrl(userDetails?.userImg)
+      .then((url) => setProfilePicUrl(url))
+      .catch((err) => console.log(err));
+  }, [userDetails]);
   useEffect(() => {
     if (nameEditing) {
       setName(userDetails.name);
@@ -39,6 +55,7 @@ const UserComponent = ({ setShowUser }) => {
       aboutRef.current.focus();
     }
   }, [aboutEditing]);
+
   async function updateUserProfile(key, value) {
     try {
       await updateDoc(doc(db, `users/${getUserId()}/`), { [key]: value });
@@ -51,9 +68,22 @@ const UserComponent = ({ setShowUser }) => {
     console.log("trying to add doc");
     try {
       await setDoc(doc(db, `users/${getUserId()}/`), { [key]: value });
-      // await addDoc(collection(db, `users`), { [key]: value });
     } catch (error) {
       console.log(error);
+    }
+  }
+  async function changeHandler(e) {
+    if (e.target.files[0]) {
+      try {
+        const location = await uploadChatPhotoToDb(
+          e.target.files[0],
+          `users/${getUserId()}`
+        );
+        await updateUserProfile("userImg", location);
+      } catch (error) {
+        console.warn(error);
+      }
+      // const url = await getChatImgUrl(location);
     }
   }
   return (
@@ -79,10 +109,8 @@ const UserComponent = ({ setShowUser }) => {
             setImgHover(false);
           }}
         >
-          <img
-            src="https://lh3.googleusercontent.com/a-/AOh14GgW5GVmkcberrrJG1lDmiA8hWS3x-LA8YW_7ts5=s96-c"
-            alt=""
-          />
+          <img src={profilePicUrl || getUserPhotoUrl() || UserPhoto} alt="" />
+
           <span
             className="img-cover"
             style={{
@@ -90,10 +118,19 @@ const UserComponent = ({ setShowUser }) => {
             }}
             title={"Photo Picker"}
           >
-            <span>
+            <span className="hover-container">
               <PhotoCameraIcon />
+
+              <span>change profile picture</span>
             </span>
-            <span>change profile picture</span>
+            <input
+              className="profile-pic"
+              type="file"
+              alt="profile-picture"
+              title=""
+              accept="image/*"
+              onChange={changeHandler}
+            />
           </span>
         </div>
       </div>

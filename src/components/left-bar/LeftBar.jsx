@@ -13,6 +13,7 @@ const LeftBar = ({
   showChat,
   chatListLoaded,
   userProfileCompleted,
+  userDetails,
 }) => {
   const [chatListHeight, setChatListHeight] = useState(0);
   const [showUser, setShowUser] = useState(false);
@@ -32,7 +33,7 @@ const LeftBar = ({
         <UserComponent setShowUser={setShowUser} />
       ) : (
         <>
-          <Header setShowUser={setShowUser} />
+          <Header userDetails={userDetails} setShowUser={setShowUser} />
           <NewChat />
           <SearchBar />
           <div

@@ -13,11 +13,13 @@ const Home = () => {
   const [showChat, setShowChat] = useState({});
   const [userProfileCompleted, setUserProfileCompleted] = useState(false);
   const [chatListLoaded, setChatListLoaded] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
   const { user } = useContext(UserContext);
   console.log(user, "user");
 
   useEffect(() => {
     if (user) {
+      getUserDetailsFromDb(getUserId(), setUserDetails);
       isUserProfileCompleted(getUserId(), setUserProfileCompleted);
       getChatList(getUserId(), setChatList).then(() => setChatListLoaded(true));
     }
@@ -29,6 +31,7 @@ const Home = () => {
       {user ? (
         <>
           <LeftBar
+            userDetails={userDetails}
             userProfileCompleted={userProfileCompleted}
             chatListLoaded={chatListLoaded}
             showChat={showChat}

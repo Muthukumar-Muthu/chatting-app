@@ -26,5 +26,10 @@
 .header img {
   border-radius: 50%;
   height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
 }
 /*# sourceMappingURL=style.css.map */

@@ -2,7 +2,8 @@ import "./style.css";
 
 import { getUserPhotoUrl } from "../../firebase/functions/getUserDetailsFromAuth";
 import UserSettings from "../user-settings/UserSettings";
-const Header = ({ setShowUser }) => {
+import UserPhoto from "../../assests/user-photo.jpeg";
+const Header = ({ setShowUser, userDetails }) => {
   return (
     <div className="header">
       <div
@@ -11,7 +12,10 @@ const Header = ({ setShowUser }) => {
         }}
         className="profile-picture"
       >
-        <img src={getUserPhotoUrl()} alt="" />
+        <img
+          src={userDetails?.userImg || getUserPhotoUrl() || UserPhoto}
+          alt=""
+        />
       </div>
 
       <button className="settings">

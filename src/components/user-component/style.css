@@ -40,13 +40,21 @@
 
 .user-component .user-photo div {
   height: 250px;
+  width: 250px;
   position: relative;
+  cursor: pointer;
   border-radius: 50%;
 }
 
 .user-component .user-photo img {
   height: 100%;
+  width: 100%;
   border-radius: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+  cursor: pointer;
 }
 
 .user-component .img-cover {
@@ -67,8 +75,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  cursor: pointer;
   text-transform: uppercase;
-  padding: 2em;
   text-align: center;
   color: white;
   font-size: small;
@@ -149,5 +157,24 @@
   font-size: medium;
   color: grey;
   line-height: 1.5em;
+}
+
+.user-component input[type="file"].profile-pic {
+  position: absolute;
+  inset: 0;
+  color: rgba(102, 109, 112, 0.8);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.user-component input[type="file"].profile-pic::-webkit-file-upload-button {
+  visibility: hidden;
+  color: rgba(102, 109, 112, 0.8);
+}
+
+.user-component span.hover-container {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
 }
 /*# sourceMappingURL=style.css.map */

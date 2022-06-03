@@ -9,10 +9,11 @@ function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [pending, setPending] = useState(true);
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsub = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setPending(false);
     });
+    return unsub;
   }, []);
   if (pending) {
     return <h1>Loading...</h1>;

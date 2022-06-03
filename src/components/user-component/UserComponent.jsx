@@ -6,7 +6,7 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { useEffect, useState, useRef } from "react";
 import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
-import { doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/services/firestore";
 const UserComponent = ({ setShowUser }) => {
   const [imgHover, setImgHover] = useState(false);
@@ -14,12 +14,15 @@ const UserComponent = ({ setShowUser }) => {
   const [nameEditing, setNameEditing] = useState(false);
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState({ name: "", about: "" });
   const nameRef = useRef(null);
   const aboutRef = useRef(null);
 
   useEffect(() => {
-    const unsub = getUserDetailsFromDb(getUserId(), setUserDetails);
+    let unsub = "";
+    getUserDetailsFromDb(getUserId(), setUserDetails).then(
+      (re) => (unsub = re)
+    );
     return unsub;
   }, []);
   console.log(aboutEditing);
@@ -37,7 +40,21 @@ const UserComponent = ({ setShowUser }) => {
     }
   }, [aboutEditing]);
   async function updateUserProfile(key, value) {
-    await updateDoc(doc(db, `users/${getUserId()}/`), { [key]: value });
+    try {
+      await updateDoc(doc(db, `users/${getUserId()}/`), { [key]: value });
+    } catch (error) {
+      console.warn("file not found", error);
+      addUserProfile(key, value);
+    }
+  }
+  async function addUserProfile(key, value) {
+    console.log("trying to add doc");
+    try {
+      await setDoc(doc(db, `users/${getUserId()}/`), { [key]: value });
+      // await addDoc(collection(db, `users`), { [key]: value });
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div className="user-component">

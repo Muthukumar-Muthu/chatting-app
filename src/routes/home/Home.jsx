@@ -7,28 +7,29 @@ import LoginButton from "../../components/login-button/LoginButton";
 import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import getChatList from "../../firebase/functions/getChatList";
+import { isUserProfileCompleted } from "../../firebase/functions/isUserProfileCompleted";
 const Home = () => {
   const [chatList, setChatList] = useState([]);
   const [showChat, setShowChat] = useState({});
-  const [userDetails, setUserDetails] = useState({});
+  const [userProfileCompleted, setUserProfileCompleted] = useState(false);
   const [chatListLoaded, setChatListLoaded] = useState(false);
   const { user } = useContext(UserContext);
+  console.log(user, "user");
+
   useEffect(() => {
     if (user) {
-      getUserDetailsFromDb(getUserId())
-        .then((response) => {
-          console.log(response);
-          setUserDetails(response);
-        })
-        .catch((err) => console.warn(err));
+      isUserProfileCompleted(getUserId(), setUserProfileCompleted);
       getChatList(getUserId(), setChatList).then(() => setChatListLoaded(true));
     }
   }, [user]);
+  console.log(userProfileCompleted);
+
   return (
     <div className="App">
       {user ? (
         <>
           <LeftBar
+            userProfileCompleted={userProfileCompleted}
             chatListLoaded={chatListLoaded}
             showChat={showChat}
             setShowChat={setShowChat}

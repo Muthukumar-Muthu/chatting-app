@@ -8,7 +8,7 @@ import {
 import { db } from "../../firebase/services/firestore";
 export default async function sendMessage(userId, chatObj, chatId, text) {
   try {
-    if (!text) throw new Error("Empty messgae. Not sending the message");
+    if (!text) throw new Error("Empty message. Not sending the message");
     await updateChatObjWithRecentMsg(chatId, text, chatObj);
     const response = await addDoc(collection(db, `chats/${chatId}/chats`), {
       senderId: userId,

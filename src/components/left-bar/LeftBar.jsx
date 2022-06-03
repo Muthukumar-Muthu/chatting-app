@@ -7,15 +7,28 @@ import getChatListHeight from "../../functions/getChatListHeight";
 import NewChat from "../newChat/NewChat";
 import UserComponent from "../user-component/UserComponent";
 
-const LeftBar = ({ setShowChat, chatList, showChat, chatListLoaded }) => {
+const LeftBar = ({
+  setShowChat,
+  chatList,
+  showChat,
+  chatListLoaded,
+  userProfileCompleted,
+}) => {
   const [chatListHeight, setChatListHeight] = useState(0);
   const [showUser, setShowUser] = useState(false);
   useEffect(() => {
     setChatListHeight(getChatListHeight());
   }, []);
+  console.log(
+    "for showing user com",
+    showUser,
+    userProfileCompleted,
+    showUser || userProfileCompleted
+  );
+
   return (
     <section className="leftbar">
-      {showUser ? (
+      {showUser || !userProfileCompleted ? (
         <UserComponent setShowUser={setShowUser} />
       ) : (
         <>

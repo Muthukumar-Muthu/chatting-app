@@ -86,13 +86,18 @@
       border: none;
       font-size: large;
       box-shadow: none;
+      width: 80%;
+      border-bottom: 2px solid white;
+    }
+    input:disabled {
+      color: black;
     }
     input:focus,
     input:focus-visible {
       border: none;
       outline: none;
       box-shadow: none;
-      border-bottom: thin solid #008069;
+      border-bottom: 2px solid #008069;
     }
     svg {
       color: grey;

@@ -15,7 +15,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   const [error, setError] = useState(false);
   const chatNameRef = useRef(null);
   const chatImgRef = useRef(null);
-  console.log(chatImg);
+
   useEffect(() => {
     if (error) {
       setTimeout(() => setError(false), 1000);

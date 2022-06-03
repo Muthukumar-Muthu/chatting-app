@@ -1,12 +1,44 @@
 import "./style.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
+import DoneIcon from "@mui/icons-material/Done";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
+import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/services/firestore";
 const UserComponent = ({ setShowUser }) => {
   const [imgHover, setImgHover] = useState(false);
-  console.log(imgHover);
+  const [aboutEditing, setAboutEditing] = useState(false);
+  const [nameEditing, setNameEditing] = useState(false);
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
+  const [userDetails, setUserDetails] = useState({});
+  const nameRef = useRef(null);
+  const aboutRef = useRef(null);
 
+  useEffect(() => {
+    const unsub = getUserDetailsFromDb(getUserId(), setUserDetails);
+    return unsub;
+  }, []);
+  console.log(aboutEditing);
+
+  useEffect(() => {
+    if (nameEditing) {
+      setName(userDetails.name);
+      nameRef.current?.focus();
+    } else setName("");
+  }, [nameEditing]);
+  useEffect(() => {
+    if (aboutEditing) {
+      setAbout(userDetails.about);
+      aboutRef.current.focus();
+    }
+  }, [aboutEditing]);
+  async function updateUserProfile(key, value) {
+    await updateDoc(doc(db, `users/${getUserId()}/`), { [key]: value });
+  }
   return (
     <div className="user-component">
       <header>
@@ -44,16 +76,35 @@ const UserComponent = ({ setShowUser }) => {
             <span>
               <PhotoCameraIcon />
             </span>
-            <span> change profile picture</span>
+            <span>change profile picture</span>
           </span>
         </div>
       </div>
       <div className="inputs">
         <label htmlFor="name">Your Name</label>
         <div className="values">
-          <input type="text" id="name" readOnly value={"Muthu Kumar M"} />
+          <input
+            ref={nameRef}
+            type="text"
+            id="name"
+            onChange={(e) => {
+              nameEditing && setName(e.target.value);
+            }}
+            value={nameEditing ? name : userDetails.name}
+            spellCheck="false"
+            disabled={!nameEditing ? true : false}
+          />
           <span className="edit-button">
-            <EditIcon />
+            {nameEditing ? (
+              <DoneIcon
+                onClick={() => {
+                  updateUserProfile("name", name);
+                  setNameEditing(false);
+                }}
+              />
+            ) : (
+              <EditIcon onClick={() => setNameEditing(true)} />
+            )}
           </span>
         </div>
       </div>
@@ -65,13 +116,26 @@ const UserComponent = ({ setShowUser }) => {
         <label htmlFor="about">About</label>
         <div className="values">
           <input
+            ref={aboutRef}
             type="text"
             id="about"
-            readOnly
-            value={"You get out ,what you put in🔥"}
+            value={aboutEditing ? about : userDetails.about}
+            onChange={(e) => {
+              aboutEditing && setAbout(e.target.value);
+            }}
+            disabled={!aboutEditing ? true : false}
           />
           <span className="edit-button">
-            <EditIcon />
+            {aboutEditing ? (
+              <DoneIcon
+                onClick={() => {
+                  updateUserProfile("about", about);
+                  setAboutEditing(false);
+                }}
+              />
+            ) : (
+              <EditIcon onClick={() => setAboutEditing(true)} />
+            )}
           </span>
         </div>
       </div>

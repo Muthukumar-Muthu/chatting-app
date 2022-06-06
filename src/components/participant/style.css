@@ -1,0 +1,50 @@
+.participant {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  padding-block: 0.7em;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.participant .user-image {
+  width: 45px;
+  height: 45px;
+  margin: 0.5em;
+}
+
+.participant .user-image img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.participant .name_and_about {
+  margin-inline: 1em;
+}
+
+.participant .name_and_about .name {
+  color: black;
+  font-size: large;
+  margin: 0;
+  padding: 0;
+}
+
+.participant .name_and_about .about {
+  color: grey;
+  font-size: normal;
+}
+
+.participant:hover {
+  background-color: #f5f6f6;
+}
+/*# sourceMappingURL=style.css.map */

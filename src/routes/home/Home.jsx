@@ -8,6 +8,7 @@ import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb"
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import getChatList from "../../firebase/functions/getChatList";
 import { isUserProfileCompleted } from "../../firebase/functions/isUserProfileCompleted";
+import ChatDetails from "../../components/chat-details/ChatDetails";
 const Home = () => {
   const [chatList, setChatList] = useState([]);
   const [showChat, setShowChat] = useState({});
@@ -39,6 +40,7 @@ const Home = () => {
             chatList={chatList}
           />
           <RightBar showChat={showChat} />
+          <ChatDetails />
         </>
       ) : (
         <div

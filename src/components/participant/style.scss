@@ -1,0 +1,36 @@
+.participant {
+  display: flex;
+  cursor: pointer;
+  padding-block: 0.7em;
+  width: 100%;
+  align-items: center;
+  transition: all 0.2s;
+  .user-image {
+    width: 45px;
+    height: 45px;
+    margin: 0.5em;
+    img {
+      object-fit: cover;
+      object-position: center;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+  .name_and_about {
+    margin-inline: 1em;
+    .name {
+      color: black;
+      font-size: large;
+      margin: 0;
+      padding: 0;
+    }
+    .about {
+      color: grey;
+      font-size: normal;
+    }
+  }
+}
+.participant:hover {
+  background-color: #f5f6f6;
+}

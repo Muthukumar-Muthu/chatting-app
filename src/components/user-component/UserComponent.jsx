@@ -83,9 +83,9 @@ const UserComponent = ({ setShowUser }) => {
       } catch (error) {
         console.warn(error);
       }
-      // const url = await getChatImgUrl(location);
     }
   }
+
   return (
     <div className="user-component">
       <header>
@@ -109,7 +109,7 @@ const UserComponent = ({ setShowUser }) => {
             setImgHover(false);
           }}
         >
-          <img src={profilePicUrl || getUserPhotoUrl() || UserPhoto} alt="" />
+          <img src={profilePicUrl || getUserPhotoUrl()} alt="" />
 
           <span
             className="img-cover"

@@ -3,7 +3,13 @@ import "./style.css";
 import { getUserPhotoUrl } from "../../firebase/functions/getUserDetailsFromAuth";
 import UserSettings from "../user-settings/UserSettings";
 import UserPhoto from "../../assests/user-photo.jpeg";
+import { useEffect, useState } from "react";
+import { getChatImgUrl } from "../../firebase/functions/getChatImgUrl";
 const Header = ({ setShowUser, userDetails }) => {
+  const [userProfile, setUserProfile] = useState("");
+  useEffect(() => {
+    getChatImgUrl(userDetails.userImg).then(setUserProfile);
+  }, [userDetails]);
   return (
     <div className="header">
       <div
@@ -12,10 +18,7 @@ const Header = ({ setShowUser, userDetails }) => {
         }}
         className="profile-picture"
       >
-        <img
-          src={userDetails?.userImg || getUserPhotoUrl() || UserPhoto}
-          alt=""
-        />
+        <img src={userProfile || getUserPhotoUrl() || UserPhoto} alt="" />
       </div>
 
       <button className="settings">

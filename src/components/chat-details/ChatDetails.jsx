@@ -9,33 +9,44 @@ import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Participant from "../participant/Participant";
-const ChatDetails = () => {
+import timeStampToDate from "../../firebase/functions/timeStampToDate";
+import trimMsg from "../../functions/trimMsg";
+import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
+const ChatDetails = ({ showChat, setShowChatDetails }) => {
   const [imgHover, setImgHover] = useState(false);
-  const [profilePicUrl, setProfilePicUrl] = useState("");
-  const [chatDetails, setChatDetails] = useState({});
+  // const [profilePicUrl, setProfilePicUrl] = useState("");
+  const [chatOwner, setChatOwner] = useState({});
+  const chatCreatedTime = timeStampToDate(showChat?.createdAt);
+  const timeString = `on ${chatCreatedTime[0]} at ${chatCreatedTime[1]}`;
+  const participant = showChat.membersId || [];
   useEffect(() => {
-    getChatImgUrl(chatDetails?.userImg)
-      .then((url) => setProfilePicUrl(url))
-      .catch((err) => console.log(err));
-  }, [chatDetails]);
+    getUserDetailsFromDb(showChat?.createdBy, setChatOwner).catch((err) =>
+      console.warn(err)
+    );
+  }, [showChat]);
 
   async function changeHandler(e) {
-    if (e.target.files[0]) {
-      try {
-        const location = await uploadChatPhotoToDb(
-          e.target.files[0],
-          `users/${getUserId()}`
-        );
-        //      await updateUserProfile("userImg", location);
-      } catch (error) {
-        console.warn(error);
-      }
-    }
+    // if (e.target.files[0]) {
+    //   try {
+    //     const location = await uploadChatPhotoToDb(
+    //       e.target.files[0],
+    //       `users/${getUserId()}`
+    //     );
+    //     //      await updateUserProfile("userImg", location);
+    //   } catch (error) {
+    //     console.warn(error);
+    //   }
+    // }
   }
   return (
     <section className="chat-details-right">
       <header className="chat-details-header">
-        <span className="cross-icon">
+        <span
+          className="cross-icon"
+          onClick={() => {
+            setShowChatDetails(false);
+          }}
+        >
           <CloseIcon />
         </span>
         <span>Group info</span>
@@ -50,7 +61,7 @@ const ChatDetails = () => {
             setImgHover(false);
           }}
         >
-          <img src={profilePicUrl} alt="" />
+          <img src={showChat?.chatImg} alt="" />
 
           <span
             className="img-cover"
@@ -81,7 +92,7 @@ const ChatDetails = () => {
           <div className="values">
             <input
               type="text"
-              value={"Important"}
+              value={showChat?.chatName}
               id="name"
               spellCheck="false"
               readOnly
@@ -94,7 +105,12 @@ const ChatDetails = () => {
         </div>
       </div>
       <div className="group-members center-content">
-        <span>Group · {1} participant</span>
+        <span>
+          Group · 
+          {`${showChat?.membersId?.length} ${
+            showChat?.membersId?.length === 1 ? "participant" : "participants"
+          }`}
+        </span>
       </div>
       <div className="inputs-wrapper">
         <div className="inputs">
@@ -102,7 +118,7 @@ const ChatDetails = () => {
           <div className="values">
             <input
               type="text"
-              value={"Important"}
+              value={showChat?.chatAbout}
               id="name"
               spellCheck="false"
               readOnly
@@ -115,44 +131,16 @@ const ChatDetails = () => {
         </div>
       </div>
       <div className="center-content create-time">
-        <span>Group created by you, on 09/11/2021 at 7:02 pm</span>
+        <span>
+          Group created by {chatOwner.name}, {timeString}
+        </span>
       </div>
       <div className="group-participants ">
         <span>1 participant</span>
         <ul>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
-          <li>
-            <Participant />
-          </li>
+          {participant.map((id) => (
+            <Participant key={id} id={id} />
+          ))}
         </ul>
       </div>
       <div className="exit-group">

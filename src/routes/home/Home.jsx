@@ -15,9 +15,13 @@ const Home = () => {
   const [userProfileCompleted, setUserProfileCompleted] = useState(false);
   const [chatListLoaded, setChatListLoaded] = useState(false);
   const [userDetails, setUserDetails] = useState({});
+  const [showChatDetails, setShowChatDetails] = useState(true);
   const { user } = useContext(UserContext);
   console.log(user, "user");
 
+  useEffect(() => {
+    setShowChat({});
+  }, []);
   useEffect(() => {
     if (user) {
       getUserDetailsFromDb(getUserId(), setUserDetails);
@@ -32,6 +36,7 @@ const Home = () => {
       {user ? (
         <>
           <LeftBar
+            setShowChatDetails={setShowChatDetails}
             userDetails={userDetails}
             userProfileCompleted={userProfileCompleted}
             chatListLoaded={chatListLoaded}
@@ -39,8 +44,16 @@ const Home = () => {
             setShowChat={setShowChat}
             chatList={chatList}
           />
-          <RightBar showChat={showChat} />
-          <ChatDetails />
+          <RightBar
+            setShowChatDetails={setShowChatDetails}
+            showChat={showChat}
+          />
+          {showChatDetails && (
+            <ChatDetails
+              setShowChatDetails={setShowChatDetails}
+              showChat={showChat}
+            />
+          )}
         </>
       ) : (
         <div

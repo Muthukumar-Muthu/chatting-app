@@ -2,9 +2,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./style.css";
 import trimMsg from "../../functions/trimMsg";
-const ChatHeader = ({ showChat }) => {
+const ChatHeader = ({ showChat, setShowChatDetails }) => {
   return (
-    <div className="chat-header ">
+    <div className="chat-header" onClick={() => setShowChatDetails(true)}>
       <div className="chat-image profile-picture">
         <img src={showChat.chatImg} alt="" />
       </div>

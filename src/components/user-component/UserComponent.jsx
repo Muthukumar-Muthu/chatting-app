@@ -73,6 +73,7 @@ const UserComponent = ({ setShowUser }) => {
     }
   }
   async function changeHandler(e) {
+    console.log("uploading to db");
     if (e.target.files[0]) {
       try {
         const location = await uploadChatPhotoToDb(
@@ -130,6 +131,7 @@ const UserComponent = ({ setShowUser }) => {
               title=""
               accept="image/*"
               onChange={changeHandler}
+              autoComplete="off"
             />
           </span>
         </div>
@@ -147,6 +149,7 @@ const UserComponent = ({ setShowUser }) => {
             value={nameEditing ? name : userDetails.name}
             spellCheck="false"
             disabled={!nameEditing ? true : false}
+            autoComplete="off"
           />
           <span className="edit-button">
             {nameEditing ? (

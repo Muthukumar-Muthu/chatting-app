@@ -6,7 +6,7 @@ export async function getChatImgUrl(path) {
 
   try {
     const response = await getDownloadURL(ref(storageDb, path));
-    console.assert(response);
+    console.log("img1", response);
     return response;
   } catch (error) {
     console.warn("null path for chatImg", path);

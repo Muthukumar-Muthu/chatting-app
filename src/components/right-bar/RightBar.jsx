@@ -5,7 +5,7 @@ import ChatHeader from "../chatheader/ChatHeader";
 const RightBar = ({ showChat, setShowChatDetails }) => {
   return (
     <section className="rightbar">
-      {showChat.chatName && (
+      {showChat && (
         <>
           <ChatHeader
             setShowChatDetails={setShowChatDetails}

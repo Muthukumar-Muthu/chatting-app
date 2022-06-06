@@ -15,7 +15,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
   }, []);
 
   function clickHandler() {
-    if (showChat.chatId !== chatId) setShowChat({ chatId, ...chat });
+    if (showChat?.chatId !== chatId) setShowChat({ chatId, ...chat });
   }
   return (
     <>
@@ -23,7 +23,7 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
         <div
           className="chat"
           style={{
-            backgroundColor: showChat.chatId === chatId ? "#f0f2f5" : "",
+            backgroundColor: showChat?.chatId === chatId ? "#f0f2f5" : "",
           }}
           onClick={clickHandler}
         >

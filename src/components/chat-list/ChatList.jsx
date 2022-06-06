@@ -7,14 +7,18 @@ const ChatList = ({ chatList, showChat, setShowChat }) => {
 
   return (
     <div className="chat-list">
-      {chatList.map((chatDetail) => (
-        <Chat
-          key={chatDetail.docId}
-          showChat={showChat}
-          setShowChat={setShowChat}
-          chatDetail={chatDetail}
-        />
-      ))}
+      {chatList.length !== 0 ? (
+        chatList.map((chatDetail) => (
+          <Chat
+            key={chatDetail.docId}
+            showChat={showChat}
+            setShowChat={setShowChat}
+            chatDetail={chatDetail}
+          />
+        ))
+      ) : (
+        <h2 style={{ textAlign: "center" }}>Get started</h2>
+      )}
     </div>
   );
 };

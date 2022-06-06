@@ -11,17 +11,17 @@ import { isUserProfileCompleted } from "../../firebase/functions/isUserProfileCo
 import ChatDetails from "../../components/chat-details/ChatDetails";
 const Home = () => {
   const [chatList, setChatList] = useState([]);
-  const [showChat, setShowChat] = useState({});
+  const [showChat, setShowChat] = useState(null);
   const [userProfileCompleted, setUserProfileCompleted] = useState(false);
   const [chatListLoaded, setChatListLoaded] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const [showChatDetails, setShowChatDetails] = useState(true);
+  const [showChatDetails, setShowChatDetails] = useState(false);
   const { user } = useContext(UserContext);
   console.log(user, "user");
 
   useEffect(() => {
-    setShowChat({});
-  }, []);
+    if (!(chatList.length > 1)) setShowChat(null);
+  }, [chatList]);
   useEffect(() => {
     if (user) {
       getUserDetailsFromDb(getUserId(), setUserDetails);
@@ -29,6 +29,7 @@ const Home = () => {
       getChatList(getUserId(), setChatList).then(() => setChatListLoaded(true));
     }
   }, [user]);
+
   console.log(userProfileCompleted);
 
   return (
@@ -48,7 +49,7 @@ const Home = () => {
             setShowChatDetails={setShowChatDetails}
             showChat={showChat}
           />
-          {showChatDetails && (
+          {showChatDetails && showChat && (
             <ChatDetails
               setShowChatDetails={setShowChatDetails}
               showChat={showChat}

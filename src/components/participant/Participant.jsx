@@ -4,7 +4,6 @@ import { getUserPhotoUrl } from "../../firebase/functions/getUserDetailsFromAuth
 import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
 import "./style.css";
 const Participant = ({ id }) => {
-  console.log(id);
   const [userDetails, setUserDetails] = useState({});
   const [userImg, setUserImg] = useState(null);
 
@@ -12,8 +11,7 @@ const Participant = ({ id }) => {
     getUserDetailsFromDb(id, setUserDetails)
       .then(
         getChatImgUrl(userDetails.userImg).then((url) => {
-          console.log(url);
-
+          console.warn(`participants`, url);
           setUserImg(url);
         })
       )

@@ -12,7 +12,7 @@ const Message = ({ messageContent, senderId, time }) => {
       }
     >
       <span className="text">{messageContent}</span>
-      <span className="time">{chatTime}</span>
+      <span className="time">{chatTime.join(" ")}</span>
     </div>
   );
 };

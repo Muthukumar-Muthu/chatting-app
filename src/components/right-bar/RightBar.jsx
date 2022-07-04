@@ -2,18 +2,23 @@ import "./style.css";
 import TypeArea from "../typearea/TypeArea";
 import ChatArea from "../chatarea/ChatArea";
 import ChatHeader from "../chatheader/ChatHeader";
-const RightBar = ({ showChat, setShowChatDetails }) => {
+import SetupProfile from "../setup-profile/SetupProfile";
+const RightBar = ({ showChat, setShowChatDetails, showUserComponent }) => {
   return (
     <section className="rightbar">
-      {showChat && (
-        <>
-          <ChatHeader
-            setShowChatDetails={setShowChatDetails}
-            showChat={showChat}
-          />
-          <ChatArea showChat={showChat} />
-          <TypeArea showChat={showChat} />
-        </>
+      {showUserComponent ? (
+        <SetupProfile />
+      ) : (
+        showChat && (
+          <>
+            <ChatHeader
+              setShowChatDetails={setShowChatDetails}
+              showChat={showChat}
+            />
+            <ChatArea showChat={showChat} />
+            <TypeArea showChat={showChat} />
+          </>
+        )
       )}
     </section>
   );

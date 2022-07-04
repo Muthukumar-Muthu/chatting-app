@@ -106,7 +106,7 @@ const ChatDetails = ({ showChat, setShowChatDetails }) => {
     }
   }
   return (
-    <section className="chat-details-right">
+    <section className="chat-details-right right-right-bar">
       <header className="chat-details-header">
         <span
           className="cross-icon"

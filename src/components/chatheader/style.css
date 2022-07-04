@@ -24,11 +24,13 @@
 .chat-header .chat-title {
   font-weight: normal;
   font-size: large;
+  max-width: 300px;
 }
 
 .chat-header .chat-about {
   color: #667781;
   font-size: small;
+  max-width: 300px;
 }
 
 .chat-header .settings {

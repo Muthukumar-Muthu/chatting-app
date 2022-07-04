@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-
+import Preloader from "../components/preloader/preloader";
 import { auth } from "../firebase/services/auth";
 const UserContext = createContext();
 
@@ -16,7 +16,7 @@ function UserContextProvider({ children }) {
     return unsub;
   }, []);
   if (pending) {
-    return <h1>Loading...</h1>;
+    return <Preloader />;
   }
   return (
     <Provider

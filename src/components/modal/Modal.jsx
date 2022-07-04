@@ -9,7 +9,7 @@ export default function BasicModal({ openModal, component, setOpenModal }) {
     <div
       className="modal-wrapper"
       style={{
-        display: !openModal && "none",
+        display: !openModal && "  none",
       }}
     >
       <div className="modal">

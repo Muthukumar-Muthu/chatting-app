@@ -5,6 +5,7 @@
   background-color: #f0f2f5;
   align-items: center;
   cursor: pointer;
+
   .search-button {
     margin-left: auto;
   }
@@ -14,10 +15,12 @@
   .chat-title {
     font-weight: normal;
     font-size: large;
+    max-width: 300px;
   }
   .chat-about {
     color: #667781;
     font-size: small;
+    max-width: 300px;
   }
   .settings {
     border: none;

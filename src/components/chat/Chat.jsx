@@ -31,7 +31,12 @@ const Chat = ({ chatDetail, showChat, setShowChat }) => {
             <img src={chat.chatImg} alt="" />
           </div>
           <div className="chat-details">
-            <h2 className="chat-heading">{chat.chatName}</h2>
+            <h2
+              className="chat-heading"
+              style={{ height: "1.5em", overflow: "hidden", display: "grid" }}
+            >
+              {chat.chatName}
+            </h2>
             <p className="chat-msg">{chat.recentMsg}</p>
           </div>
           <div className="time">

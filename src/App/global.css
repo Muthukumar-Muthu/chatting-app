@@ -6,4 +6,8 @@ svg {
 #incomplete {
   cursor: not-allowed;
 }
+
+#root {
+  height: 100vh;
+}
 /*# sourceMappingURL=global.css.map */

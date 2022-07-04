@@ -29,7 +29,7 @@ body,
 
 .leftbar {
   flex: 1 1 30%;
-  min-width: 450px;
+  max-width: 450px;
 }
 .rightbar {
   flex: 1 5 70%;

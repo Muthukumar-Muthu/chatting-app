@@ -15,6 +15,7 @@ const LeftBar = ({
   userProfileCompleted,
   userDetails,
   setShowChatDetials,
+  setShowUserComponent,
 }) => {
   const [chatListHeight, setChatListHeight] = useState(0);
   const [showUser, setShowUser] = useState(false);
@@ -30,35 +31,39 @@ const LeftBar = ({
 
   return (
     <section className="leftbar">
-      {showUser || !userProfileCompleted ? (
-        <UserComponent setShowUser={setShowUser} />
-      ) : (
-        <>
-          <Header
-            setShowChatDetials={setShowChatDetials}
-            userDetails={userDetails}
+      {userProfileCompleted !== null ? (
+        showUser || userProfileCompleted === false ? (
+          <UserComponent
+            userProfileCompleted={userProfileCompleted}
+            setShowUserComponent={setShowUserComponent}
             setShowUser={setShowUser}
           />
-          <NewChat />
-          <SearchBar />
-          <div
-            style={{
-              height: chatListHeight,
-            }}
-            className="chatlist-wrapper"
-          >
-            {chatListLoaded ? (
-              <ChatList
-                showChat={showChat}
-                chatList={chatList}
-                setShowChat={setShowChat}
-              />
-            ) : (
-              <h2>Loading </h2>
-            )}
-          </div>
-        </>
-      )}
+        ) : (
+          <>
+            <Header
+              setShowChatDetials={setShowChatDetials}
+              userDetails={userDetails}
+              setShowUser={setShowUser}
+            />
+            <NewChat />
+            <SearchBar />
+            <div
+              style={{
+                height: chatListHeight,
+              }}
+              className="chatlist-wrapper"
+            >
+              {chatListLoaded ? (
+                <ChatList
+                  showChat={showChat}
+                  chatList={chatList}
+                  setShowChat={setShowChat}
+                />
+              ) : null}
+            </div>
+          </>
+        )
+      ) : null}
     </section>
   );
 };

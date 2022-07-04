@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-
 import { UserContext } from "../../context/UserContext";
 import LeftBar from "../../components/left-bar/LeftBar";
 import RightBar from "../../components/right-bar/RightBar";
@@ -9,13 +8,16 @@ import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import getChatList from "../../firebase/functions/getChatList";
 import { isUserProfileCompleted } from "../../firebase/functions/isUserProfileCompleted";
 import ChatDetails from "../../components/chat-details/ChatDetails";
+import Preloader from "../../components/preloader/preloader";
+
 const Home = () => {
   const [chatList, setChatList] = useState([]);
   const [showChat, setShowChat] = useState(null);
-  const [userProfileCompleted, setUserProfileCompleted] = useState(false);
+  const [userProfileCompleted, setUserProfileCompleted] = useState(null);
   const [chatListLoaded, setChatListLoaded] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const [showChatDetails, setShowChatDetails] = useState(false);
+  const [showUserComponent, setShowUserComponent] = useState(false);
   const { user } = useContext(UserContext);
   console.log(user, "user");
 
@@ -30,32 +32,36 @@ const Home = () => {
     }
   }, [user]);
 
-  console.log(userProfileCompleted);
-
   return (
     <div className="App">
       {user ? (
-        <>
-          <LeftBar
-            setShowChatDetails={setShowChatDetails}
-            userDetails={userDetails}
-            userProfileCompleted={userProfileCompleted}
-            chatListLoaded={chatListLoaded}
-            showChat={showChat}
-            setShowChat={setShowChat}
-            chatList={chatList}
-          />
-          <RightBar
-            setShowChatDetails={setShowChatDetails}
-            showChat={showChat}
-          />
-          {showChatDetails && showChat && (
-            <ChatDetails
+        userProfileCompleted !== null ? (
+          <>
+            <LeftBar
+              setShowChatDetails={setShowChatDetails}
+              userDetails={userDetails}
+              userProfileCompleted={userProfileCompleted}
+              chatListLoaded={chatListLoaded}
+              showChat={showChat}
+              setShowChat={setShowChat}
+              chatList={chatList}
+              setShowUserComponent={setShowUserComponent}
+            />
+            <RightBar
+              showUserComponent={showUserComponent}
               setShowChatDetails={setShowChatDetails}
               showChat={showChat}
             />
-          )}
-        </>
+            {showChatDetails && showChat && (
+              <ChatDetails
+                setShowChatDetails={setShowChatDetails}
+                showChat={showChat}
+              />
+            )}
+          </>
+        ) : (
+          <Preloader />
+        )
       ) : (
         <div
           style={{

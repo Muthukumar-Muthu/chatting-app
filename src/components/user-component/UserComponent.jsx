@@ -14,7 +14,11 @@ import { db } from "../../firebase/services/firestore";
 import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
 import { getChatImgUrl } from "../../firebase/functions/getChatImgUrl";
 import UserPhoto from "../../assests/user-photo.jpeg";
-const UserComponent = ({ setShowUser }) => {
+const UserComponent = ({
+  setShowUser,
+  setShowUserComponent,
+  userProfileCompleted,
+}) => {
   const [imgHover, setImgHover] = useState(false);
   const [aboutEditing, setAboutEditing] = useState(false);
   const [nameEditing, setNameEditing] = useState(false);
@@ -31,10 +35,14 @@ const UserComponent = ({ setShowUser }) => {
   console.log(userDetails);
   useEffect(() => {
     let unsub = "";
+    if (!userProfileCompleted) setShowUserComponent(true);
     getUserDetailsFromDb(getUserId(), setUserDetails).then(
       (re) => (unsub = re)
     );
-    return unsub;
+    return () => {
+      unsub();
+      setShowUserComponent(false);
+    };
   }, []);
   console.log(aboutEditing);
 

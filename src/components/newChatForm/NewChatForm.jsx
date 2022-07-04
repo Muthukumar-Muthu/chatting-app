@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import generateNewChat from "../../firebase/functions/generateNewChat";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
-
+import checkCharacters from "../../functions/checkCharacter";
 import Copyable from "../copyable/Copyable";
 import "./style.css";
 const NewChatForm = ({ setOpenModal, openModal }) => {
@@ -16,23 +16,27 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   const chatNameRef = useRef(null);
   const chatImgRef = useRef(null);
 
-  useEffect(() => {
-    if (error) {
-      setTimeout(() => setError(false), 1000);
-    }
-  }, [error]);
-
   function changeHandlerForChatName(e) {
     setChatName(e.target.value);
+    if (!checkCharacters(e.target.value, 10)) {
+      setError(true);
+    } else setError(false);
   }
   function changeHandlerForChatAbout(e) {
     setChatAbout(e.target.value);
+    if (!checkCharacters(e.target.value, 10)) {
+      setError(true);
+    } else setError(false);
   }
   function changeHandlerForChatPhoto(e) {
     setChatImg(e.target.files[0]);
   }
+
   async function submitHandler(e) {
     e.preventDefault();
+    if (error) {
+      return;
+    }
     setError(false);
     setLoading(true);
     console.log("submitting chat Details");
@@ -76,7 +80,12 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
       ) : (
         <form className="newChat">
           <span className="flex">
-            <label htmlFor="chat-name">Chat name</label>
+            <label htmlFor="chat-name">
+              Chat name{" "}
+              <span style={{ fontSize: "smaller", color: "grey" }}>
+                (only 10 characters)
+              </span>
+            </label>
             <input
               style={{
                 border: error ? "thin solid red" : "",
@@ -94,7 +103,12 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
             />
           </span>
           <span className="flex">
-            <label htmlFor="chat-name">Chat About</label>
+            <label htmlFor="chat-name">
+              Chat About{" "}
+              <span style={{ fontSize: "smaller", color: "grey" }}>
+                (only 10 characters)
+              </span>
+            </label>
             <input
               style={{
                 border: error ? "thin solid red" : "",

@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 
 import "./style.css";
-const Input = ({ onDone, initalValue }) => {
+const Input = ({ onDone, initalValue, label }) => {
   const [value, setValue] = useState(initalValue);
   const [edit, setEdit] = useState(false);
-
+  const inputRef = useRef(null);
+  if (edit) {
+    inputRef.current.focus();
+  }
   return (
     <div className="input">
-      <label htmlFor="name">Your Name</label>
+      <label htmlFor="name">{label}</label>
       <div className="values">
         <input
+          ref={inputRef}
           type="text"
           id="name"
           onChange={(e) => {

@@ -2,6 +2,9 @@
   height: 100%;
   background-color: #f0f2f5;
 }
+.user-component .bottom {
+  margin-top: 2em;
+}
 .user-component header {
   background-color: #008069;
   display: flex;

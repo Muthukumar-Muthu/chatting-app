@@ -141,6 +141,7 @@
   overflow: hidden;
   position: relative;
   margin: auto;
+  margin-bottom: 2em;
 }
 .img-container svg {
   color: white;
@@ -172,7 +173,7 @@
   overflow: hidden;
   position: absolute;
   inset: 0;
-  top: 35%;
+  top: 30%;
   bottom: 50%;
 }
 .img-container input {

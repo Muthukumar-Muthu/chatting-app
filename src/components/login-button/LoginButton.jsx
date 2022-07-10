@@ -1,14 +1,12 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/services/auth";
 import "./style.css";
-const LoginButton = ({ callBack }) => {
+const LoginButton = ({ callBack = () => {} }) => {
   async function loginHandler() {
     try {
       const googleProvider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, googleProvider);
-      console.log(`result - ${result}`);
-      callBack && callBack();
-      console.log(callBack);
+      await signInWithPopup(auth, googleProvider);
+      callBack();
     } catch (err) {
       console.warn(err);
     }

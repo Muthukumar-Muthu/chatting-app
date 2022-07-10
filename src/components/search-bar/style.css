@@ -2,7 +2,6 @@
   margin-block: 1em;
   margin-inline: 0.5em;
 }
-
 .search-bar input {
   width: 100%;
   background-color: #f0f2f5;
@@ -13,9 +12,7 @@
   border: none;
   font-size: medium;
 }
-
 .search-bar input:focus-visible,
 .search-bar input:focus {
   border: none;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

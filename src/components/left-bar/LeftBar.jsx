@@ -12,58 +12,50 @@ const LeftBar = ({
   chatList,
   showChat,
   chatListLoaded,
-  userProfileCompleted,
   userDetails,
   setShowChatDetials,
   setShowUserComponent,
+  showUserComponent,
 }) => {
   const [chatListHeight, setChatListHeight] = useState(0);
   const [showUser, setShowUser] = useState(false);
   useEffect(() => {
     setChatListHeight(getChatListHeight());
   }, []);
-  console.log(
-    "for showing user com",
-    showUser,
-    userProfileCompleted,
-    showUser || userProfileCompleted
-  );
 
   return (
     <section className="leftbar">
-      {userProfileCompleted !== null ? (
-        showUser || userProfileCompleted === false ? (
-          <UserComponent
-            userProfileCompleted={userProfileCompleted}
+      {showUserComponent ? (
+        <UserComponent
+          setShowUserComponent={setShowUserComponent}
+          setShowUser={setShowUser}
+        />
+      ) : (
+        <>
+          <Header
+            setShowChatDetials={setShowChatDetials}
             setShowUserComponent={setShowUserComponent}
+            userDetails={userDetails}
             setShowUser={setShowUser}
           />
-        ) : (
-          <>
-            <Header
-              setShowChatDetials={setShowChatDetials}
-              userDetails={userDetails}
-              setShowUser={setShowUser}
-            />
-            <NewChat />
-            <SearchBar />
-            <div
-              style={{
-                height: chatListHeight,
-              }}
-              className="chatlist-wrapper"
-            >
-              {chatListLoaded ? (
-                <ChatList
-                  showChat={showChat}
-                  chatList={chatList}
-                  setShowChat={setShowChat}
-                />
-              ) : null}
-            </div>
-          </>
-        )
-      ) : null}
+          <NewChat />
+          <SearchBar />
+          <div
+            style={{
+              height: chatListHeight,
+            }}
+            className="chatlist-wrapper"
+          >
+            {chatListLoaded ? (
+              <ChatList
+                showChat={showChat}
+                chatList={chatList}
+                setShowChat={setShowChat}
+              />
+            ) : null}
+          </div>
+        </>
+      )}
     </section>
   );
 };

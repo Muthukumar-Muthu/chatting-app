@@ -1,7 +1,7 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../services/firestore";
 
-export default async function getChatList(uid, setChatList) {
+export default async function listenChatList(uid, setChatList) {
   const chatListQuery = query(collection(db, `users/${uid}/chats/`));
   let chatList = [];
   const unsubscribe = onSnapshot(chatListQuery, (querySnapshot) => {

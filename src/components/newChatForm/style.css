@@ -1,26 +1,18 @@
 form.newChat {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   padding: 1em;
   border-radius: 20px;
 }
-
 form.newChat input {
   margin-block: 1em;
   display: inline;
   border: thin solid lightgrey;
   letter-spacing: normal;
 }
-
-form.newChat input[type="file"] {
+form.newChat input[type=file] {
   font-size: medium;
 }
-
 form.newChat input {
   width: 100%;
   display: block;
@@ -31,11 +23,9 @@ form.newChat input {
   background-color: #ffffff;
   font-size: large;
 }
-
 form.newChat label {
   display: inline;
 }
-
 form.newChat .submit-button {
   background-color: #14bde4;
   color: white;
@@ -47,8 +37,6 @@ form.newChat .submit-button {
   display: block;
   max-width: 250px;
 }
-
 form.newChat span.flex {
   width: 100%;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

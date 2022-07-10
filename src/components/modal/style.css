@@ -3,18 +3,15 @@
   inset: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.5);
-  display: -ms-grid;
   display: grid;
   place-items: center;
   z-index: 2;
 }
-
 .modal-wrapper > * {
   position: relative;
   z-index: 1;
   color: white;
 }
-
 .modal-wrapper .modal {
   min-height: 200px;
   border-radius: 10px;
@@ -25,23 +22,19 @@
   color: black;
   border-radius: 20px;
   width: 422.7px;
-  display: -ms-grid;
   display: grid;
   place-items: center;
   border: none;
   padding-top: 2em;
 }
-
 .modal-wrapper .close-button {
   cursor: pointer;
   color: red;
   font-size: large;
   position: absolute;
   top: 0;
-  right: 010px;
+  right: 10px;
 }
-
 .modal-wrapper svg {
   font-size: 50px;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

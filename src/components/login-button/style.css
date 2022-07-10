@@ -1,10 +1,9 @@
 .login-button button {
   padding: 0.5em 1em;
   color: white;
-  background-color: #2cd82c;
+  background-color: rgb(44, 216, 44);
   border: none;
   cursor: pointer;
   font-size: larger;
   border-radius: 10px;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

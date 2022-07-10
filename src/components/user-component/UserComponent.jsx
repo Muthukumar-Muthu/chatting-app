@@ -14,11 +14,13 @@ import { db } from "../../firebase/services/firestore";
 import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
 import { getChatImgUrl } from "../../firebase/functions/getChatImgUrl";
 import UserPhoto from "../../assests/user-photo.jpeg";
+import Image from "../image/Image";
 const UserComponent = ({
   setShowUser,
   setShowUserComponent,
   userProfileCompleted,
 }) => {
+  /*
   const [imgHover, setImgHover] = useState(false);
   const [aboutEditing, setAboutEditing] = useState(false);
   const [nameEditing, setNameEditing] = useState(false);
@@ -204,6 +206,15 @@ const UserComponent = ({
           </span>
         </div>
       </div>
+    </div>
+  );
+
+  */
+
+  return (
+    <div>
+      <h2>UserComponent</h2>
+      <Image />
     </div>
   );
 };

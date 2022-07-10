@@ -1,10 +1,7 @@
 .message {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   padding: 0.5em;
-  -webkit-box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
-          box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
   margin-block: 0.25em;
   max-width: 500px;
   word-wrap: break-word;
@@ -13,14 +10,12 @@
   overflow-wrap: break-word;
   cursor: pointer;
 }
-
 .message .time {
   font-size: x-small;
   margin-top: auto;
   margin-left: 0.5em;
   color: #667781;
 }
-
 .message .text {
   overflow-wrap: normal;
   word-wrap: break-word;
@@ -39,5 +34,4 @@
   border-top-right-radius: 0;
   margin-left: auto;
   background-color: #d9fdd3;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

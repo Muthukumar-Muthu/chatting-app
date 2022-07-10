@@ -142,6 +142,9 @@
   position: relative;
   margin: auto;
 }
+.img-container svg {
+  color: white;
+}
 .img-container img {
   width: 100%;
   height: 100%;
@@ -190,8 +193,4 @@
 }
 .img-container .hover-container {
   z-index: 2;
-}
-
-svg {
-  color: white;
 }/*# sourceMappingURL=style.css.map */

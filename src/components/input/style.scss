@@ -1,0 +1,72 @@
+.input {
+  background-color: white;
+}
+.input > * {
+  padding-block: 0.5em;
+}
+.input label {
+  display: block;
+  font-size: small;
+  padding: 1em;
+  color: rgb(0, 128, 105);
+}
+.input label,
+.input input {
+  padding: 1em 1em 0.5em 1em;
+}
+.input input[type="text"] {
+  padding-top: 0;
+  background-color: white;
+  border: none;
+  font-size: large;
+  box-shadow: none;
+  width: 80%;
+  border-bottom: 2px solid white;
+}
+.input input:disabled {
+  color: black;
+}
+.input input:focus,
+.input input:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-bottom: 2px solid #008069;
+}
+.input svg {
+  color: grey;
+  padding: none;
+}
+.input .values {
+  display: flex;
+}
+.input .edit-button {
+  margin-left: auto;
+  margin-right: 2em;
+  cursor: pointer;
+}
+p {
+  padding: 1em;
+  font-size: medium;
+  color: grey;
+  line-height: 1.5em;
+}
+input[type="file"].profile-pic {
+  position: absolute;
+  inset: 0;
+  color: rgba(102, 109, 112, 0.8);
+  cursor: pointer;
+  border-radius: 50%;
+}
+input[type="file"].profile-pic::-webkit-file-upload-button {
+  visibility: hidden;
+  color: rgba(102, 109, 112, 0.8);
+}
+span.hover-container {
+  display: grid;
+  place-items: center;
+} /*# sourceMappingURL=style.css.map */
+
+input svg {
+  color: grey;
+}

@@ -15,6 +15,7 @@ import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
 import { getChatImgUrl } from "../../firebase/functions/getChatImgUrl";
 import UserPhoto from "../../assests/user-photo.jpeg";
 import Image from "../image/Image";
+import Input from "../input/Input";
 const UserComponent = ({
   setShowUser,
   setShowUserComponent,
@@ -215,6 +216,7 @@ const UserComponent = ({
     <div>
       <h2>UserComponent</h2>
       <Image />
+      <Input onDone={() => {}} initalValue="inital Value" />
     </div>
   );
 };

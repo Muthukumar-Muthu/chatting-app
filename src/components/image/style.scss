@@ -151,7 +151,9 @@
   overflow: hidden;
   position: relative;
   margin: auto;
-
+  svg {
+    color: white;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -203,7 +205,4 @@
   .hover-container {
     z-index: 2;
   }
-}
-svg {
-  color: white;
 }

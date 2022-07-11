@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 
@@ -7,9 +7,12 @@ const Input = ({ onDone, initalValue, label }) => {
   const [value, setValue] = useState(initalValue);
   const [edit, setEdit] = useState(false);
   const inputRef = useRef(null);
-  if (edit) {
-    inputRef.current.focus();
-  }
+  useEffect(() => {
+    if (edit) {
+      inputRef.current.focus();
+    }
+  }, [edit]);
+
   return (
     <div className="input">
       <label htmlFor="name">{label}</label>

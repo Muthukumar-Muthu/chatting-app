@@ -3,7 +3,7 @@ import "./style.css";
 import { useState } from "react";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
-const Image = () => {
+const Image = ({ src }) => {
   const [hover, setHover] = useState(false);
   return (
     <div
@@ -15,7 +15,7 @@ const Image = () => {
         setHover(false);
       }}
     >
-      <img src={"https://picsum.photos/200/300"} alt="" />
+      <img src={src} alt="" />
 
       <span
         className="img-cover"
@@ -25,12 +25,11 @@ const Image = () => {
         title={"Photo Picker"}
       >
         <span className="grp">
-          <span className="">
+          <span>
             <PhotoCameraIcon />
             <span>change profile picture</span>
           </span>
           <input
-            className="profile-pic"
             type="file"
             alt="profile-picture"
             title=""

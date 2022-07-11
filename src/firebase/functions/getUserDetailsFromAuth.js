@@ -9,3 +9,6 @@ export function getUserPhotoUrl() {
 export function getUserEmailId() {
   return auth.currentUser.email;
 }
+export function getUserName() {
+  return auth.currentUser.displayName;
+}

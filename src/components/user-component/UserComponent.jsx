@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import getUserDetailsFromDb from "../../firebase/functions/getUserDetailsFromDb";
 import {
   getUserId,
+  getUserName,
   getUserPhotoUrl,
 } from "../../firebase/functions/getUserDetailsFromAuth";
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
@@ -93,9 +94,13 @@ const UserComponent = ({
         <span>Profile</span>
       </header>
       <div className="bottom">
-        <Image />
-        <Input label="Your Name" onDone={() => {}} initalValue="inv" />
-        <Input label="About" onDone={() => {}} initalValue="inv" />
+        <Image src={getUserPhotoUrl()} />
+        <Input
+          label="Your Name"
+          onDone={() => {}}
+          initalValue={getUserName()}
+        />
+        <Input label="About" onDone={() => {}} initalValue="Busy" />
         <p>
           This is not your username or pin. This name will be visible to your
           WhatsApp contacts.

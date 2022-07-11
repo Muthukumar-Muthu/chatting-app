@@ -1,139 +1,3 @@
-.user-component {
-  height: 100%;
-  background-color: #f0f2f5;
-}
-.user-component header {
-  background-color: #008069;
-  display: flex;
-  padding: 3em 2em 0.5em 1.2em;
-  font-size: 19px;
-  color: white;
-  font-weight: 500;
-}
-.user-component header .back-arrow {
-  cursor: pointer;
-  margin-right: 1em;
-}
-.user-component header svg {
-  color: white;
-}
-.user-component .user-photo {
-  margin-block: 2em;
-  min-height: 250px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 250px;
-  width: 100%;
-}
-.user-component .user-photo div {
-  height: 250px;
-  width: 250px;
-  position: relative;
-  cursor: pointer;
-  border-radius: 50%;
-}
-.user-component .user-photo img {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: center;
-     object-position: center;
-  cursor: pointer;
-}
-.user-component .img-cover {
-  position: absolute;
-  background-color: #5c6c75;
-  inset: 0;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-transform: uppercase;
-  text-align: center;
-  color: white;
-  font-size: small;
-  cursor: pointer;
-}
-.user-component .img-cover span {
-  margin-block: 0.5em;
-}
-.user-component .img-cover svg {
-  color: lightgrey;
-}
-.user-component .inputs {
-  background-color: white;
-}
-.user-component .inputs > * {
-  padding-block: 0.5em;
-}
-.user-component .inputs label {
-  display: block;
-  font-size: small;
-  padding: 1em;
-  color: rgb(0, 128, 105);
-}
-.user-component .inputs label,
-.user-component .inputs input {
-  padding: 1em 1em 0.5em 1em;
-}
-.user-component .inputs input[type=text] {
-  padding-top: 0;
-  background-color: white;
-  border: none;
-  font-size: large;
-  box-shadow: none;
-  width: 80%;
-  border-bottom: 2px solid white;
-}
-.user-component .inputs input:disabled {
-  color: black;
-}
-.user-component .inputs input:focus,
-.user-component .inputs input:focus-visible {
-  border: none;
-  outline: none;
-  box-shadow: none;
-  border-bottom: 2px solid #008069;
-}
-.user-component .inputs svg {
-  color: grey;
-  padding: none;
-}
-.user-component .inputs .values {
-  display: flex;
-}
-.user-component .inputs .edit-button {
-  margin-left: auto;
-  margin-right: 2em;
-  cursor: pointer;
-}
-.user-component p {
-  padding: 1em;
-  font-size: medium;
-  color: grey;
-  line-height: 1.5em;
-}
-.user-component input[type=file].profile-pic {
-  position: absolute;
-  inset: 0;
-  color: rgba(102, 109, 112, 0.8);
-  cursor: pointer;
-  border-radius: 50%;
-}
-.user-component input[type=file].profile-pic::-webkit-file-upload-button {
-  visibility: hidden;
-  color: rgba(102, 109, 112, 0.8);
-}
-.user-component span.hover-container {
-  display: grid;
-  place-items: center;
-}
-
 .img-container {
   width: 200px;
   height: 200px;
@@ -145,10 +9,6 @@
 }
 .img-container svg {
   color: white;
-}
-.img-container img {
-  width: 100%;
-  height: 100%;
 }
 .img-container .img-cover {
   overflow: hidden;
@@ -181,14 +41,14 @@
   width: 100%;
   z-index: 3;
 }
-.img-container input[type=file].profile-pic {
+.img-container input[type=file] {
   position: absolute;
   inset: 0;
   color: rgba(102, 109, 112, 0.8);
   cursor: pointer;
   border-radius: 50%;
 }
-.img-container input[type=file].profile-pic::-webkit-file-upload-button {
+.img-container input[type=file]::-webkit-file-upload-button {
   visibility: hidden;
   color: rgba(102, 109, 112, 0.8);
 }

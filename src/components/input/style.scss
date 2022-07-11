@@ -46,28 +46,3 @@
   margin-right: 2em;
   cursor: pointer;
 }
-p {
-  padding: 1em;
-  font-size: medium;
-  color: grey;
-  line-height: 1.5em;
-}
-input[type="file"].profile-pic {
-  position: absolute;
-  inset: 0;
-  color: rgba(102, 109, 112, 0.8);
-  cursor: pointer;
-  border-radius: 50%;
-}
-input[type="file"].profile-pic::-webkit-file-upload-button {
-  visibility: hidden;
-  color: rgba(102, 109, 112, 0.8);
-}
-span.hover-container {
-  display: grid;
-  place-items: center;
-} /*# sourceMappingURL=style.css.map */
-
-input svg {
-  color: grey;
-}

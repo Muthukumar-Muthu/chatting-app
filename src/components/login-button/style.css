@@ -1,3 +1,9 @@
+.login-button {
+  height: "100%";
+  width: "100%";
+  display: "grid";
+  place-items: "center";
+}
 .login-button button {
   padding: 0.5em 1em;
   color: white;

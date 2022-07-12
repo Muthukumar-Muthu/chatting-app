@@ -1,7 +1,7 @@
 import { auth } from "../firebase/config";
 
 export function getUserId() {
-  return auth.currentUser.uid;
+  return auth.currentUser?.uid;
 }
 export function getUserPhotoUrl() {
   return auth.currentUser.photoURL;

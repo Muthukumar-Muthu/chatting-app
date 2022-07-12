@@ -7,19 +7,20 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-export default function useListen({ path }) {
+export default function useListen({ path, state, type }) {
   const [data, setData] = useState({
-    data: [],
+    data: type === "collection" ? [] : {},
     error: null,
     loading: true,
   });
 
-  const type = getType(path);
-
   useEffect(() => {
-    let unsub = listen({ path, type, setData });
+    let unsub = null;
+    if (state) {
+      unsub = listen({ path, type, setData });
+    }
     return unsub;
-  }, []);
+  }, [state]);
 
   return data;
 }
@@ -37,7 +38,7 @@ function listen({ path, setData, type }) {
 
           setData((p) => ({
             ...p,
-            data: [{ ...data, id: doc.id }],
+            data: { ...data, docId: doc.id },
           }));
         },
         (error) => {
@@ -53,7 +54,7 @@ function listen({ path, setData, type }) {
           const data = [];
           setData((p) => ({ ...p, loading: true }));
           snapshot.forEach((doc) => {
-            data.push({ ...doc.data(), id: doc.id });
+            data.push({ ...doc.data(), docId: doc.id });
           });
           setData((p) => ({
             ...p,

@@ -1,51 +1,56 @@
 import "./style.css";
-import trimMsg from "../../functions/trimMsg";
-import { useEffect, useState } from "react";
-import getChatDetail from "../../firebase/functions/getChatDetail";
+
 import timeStampToDate from "../../firebase/functions/timeStampToDate";
+import useListen from "../../hooks/useListen";
+import useChat from "../../hooks/useChat";
 
-const Chat = ({ chatDetail, showChat, setShowChat }) => {
-  const { chatId } = chatDetail;
-  const [chat, setChat] = useState({});
+const Chat = ({ chatId }) => {
+  const {
+    data: chat,
+    loading,
+    error,
+  } = useListen({
+    path: `chats/${chatId}`,
+    type: "doc",
+    state: 1,
+  });
 
-  const [date, time] = timeStampToDate(chat.lastUpdateTime);
+  const { chat: showChat, setChat: setShowChat } = useChat();
 
-  useEffect(() => {
-    getChatDetail(chatId, setChat);
-  }, []);
+  const chatName = chat.chatDetails?.name;
+  const lastUpdate = chat.chatDetails?.lastUpdate;
+  const chatAbout = chat.chatDetails?.about;
+  const [date, time] = timeStampToDate(lastUpdate);
+  console.log(chatName, date, time);
 
   function clickHandler() {
     if (showChat?.chatId !== chatId) setShowChat({ chatId, ...chat });
   }
   return (
-    <>
-      {chat.chatName && (
-        <div
-          className="chat"
-          style={{
-            backgroundColor: showChat?.chatId === chatId ? "#f0f2f5" : "",
-          }}
-          onClick={clickHandler}
+    <div
+      className="chat"
+      style={{
+        backgroundColor: showChat?.chatId === chatId ? "#f0f2f5" : "",
+      }}
+      onClick={clickHandler}
+    >
+      <div className="chat-image">
+        <img src={""} alt="chat" />
+      </div>
+      <div className="chat-details">
+        <h2
+          className="chat-heading"
+          style={{ height: "1.5em", overflow: "hidden", display: "grid" }}
         >
-          <div className="chat-image">
-            <img src={chat.chatImg} alt="" />
-          </div>
-          <div className="chat-details">
-            <h2
-              className="chat-heading"
-              style={{ height: "1.5em", overflow: "hidden", display: "grid" }}
-            >
-              {chat.chatName}
-            </h2>
-            <p className="chat-msg">{chat.recentMsg}</p>
-          </div>
-          <div className="time">
-            <span>{date}</span>
-            <span>{time}</span>
-          </div>
-        </div>
-      )}
-    </>
+          {chatName}
+        </h2>
+        <p className="chat-msg">{chatAbout}</p>
+      </div>
+      <div className="time">
+        <span>{date}</span>
+        <span>{time}</span>
+      </div>
+    </div>
   );
 };
 export default Chat;

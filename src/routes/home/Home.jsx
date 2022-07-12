@@ -1,50 +1,38 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
+import { ChatContextProvider } from "../../context/ChatContext";
 import LeftBar from "../../components/left-bar/LeftBar";
 import RightBar from "../../components/right-bar/RightBar";
 import LoginButton from "../../components/login-button/LoginButton";
-
-import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
+import { getUserId } from "../../firebase/functions";
 
 import Preloader from "../../components/preloader/preloader";
 import useListen from "../../hooks/useListen";
 
 const Home = () => {
-  const [showChat, setShowChat] = useState(null);
+  const { user } = useContext(UserContext);
   const {
     data: chatList,
     error,
     loading,
   } = useListen({
-    path: `users/${getUserId()}/chats/`,
+    path: `users/${getUserId()}/chats`,
+    state: user,
+    type: "collection",
   });
-  const { user } = useContext(UserContext);
+  console.log(chatList);
 
   if (!user) {
-    return (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "grid",
-          placeItems: "center",
-        }}
-        className="login-wrapper"
-      >
-        <LoginButton />
-      </div>
-    );
+    return <LoginButton />;
   }
 
   return (
-    <div className="App">
-      <LeftBar
-        showChat={showChat}
-        setShowChat={setShowChat}
-        chatList={chatList}
-      />
-      <RightBar showChat={showChat} />
-    </div>
+    <ChatContextProvider>
+      <div className="App">
+        <LeftBar chatList={chatList} chatListLoading={loading} />
+        <RightBar />
+      </div>
+    </ChatContextProvider>
   );
 };
 export default Home;

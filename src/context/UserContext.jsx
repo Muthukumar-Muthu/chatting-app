@@ -8,6 +8,7 @@ function UserContextProvider({ children }) {
   const { Provider } = UserContext;
   const [user, setUser] = useState(null);
   const [pending, setPending] = useState(true);
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setUser(user);

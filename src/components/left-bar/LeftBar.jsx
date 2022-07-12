@@ -1,61 +1,20 @@
-import { useEffect, useState } from "react";
 import "./style.css";
 import Header from "../header/Header";
-import SearchBar from "../search-bar/SearchBar";
+
 import ChatList from "../chat-list/ChatList";
-import getChatListHeight from "../../functions/getChatListHeight";
+
 import NewChat from "../newChat/NewChat";
-import UserComponent from "../user-component/UserComponent";
+import Preloader from "../preloader/preloader";
 
-const LeftBar = ({
-  setShowChat,
-  chatList,
-  showChat,
-  chatListLoaded,
-  userDetails,
-  setShowChatDetials,
-  setShowUserComponent,
-  showUserComponent,
-}) => {
-  const [chatListHeight, setChatListHeight] = useState(0);
-  const [showUser, setShowUser] = useState(false);
-  useEffect(() => {
-    setChatListHeight(getChatListHeight());
-  }, []);
-
+const LeftBar = ({ chatListLoading, chatList }) => {
+  console.log(chatListLoading, chatList);
   return (
     <section className="leftbar">
-      {showUserComponent ? (
-        <UserComponent
-          setShowUserComponent={setShowUserComponent}
-          setShowUser={setShowUser}
-        />
-      ) : (
-        <>
-          <Header
-            setShowChatDetials={setShowChatDetials}
-            setShowUserComponent={setShowUserComponent}
-            userDetails={userDetails}
-            setShowUser={setShowUser}
-          />
-          <NewChat />
-          <SearchBar />
-          <div
-            style={{
-              height: chatListHeight,
-            }}
-            className="chatlist-wrapper"
-          >
-            {chatListLoaded ? (
-              <ChatList
-                showChat={showChat}
-                chatList={chatList}
-                setShowChat={setShowChat}
-              />
-            ) : null}
-          </div>
-        </>
-      )}
+      <Header />
+      <NewChat />
+      <div className="chatlist-wrapper">
+        {chatListLoading ? <Preloader /> : <ChatList chatList={chatList} />}
+      </div>
     </section>
   );
 };

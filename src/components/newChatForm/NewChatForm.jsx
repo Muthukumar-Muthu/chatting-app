@@ -11,42 +11,38 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   const [chatImg, setChatImg] = useState(null);
   const [chatId, setChatId] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState(false);
-  const chatNameRef = useRef(null);
-  const chatImgRef = useRef(null);
 
-  function changeHandlerForChatName(e) {
-    setChatName(e.target.value);
-    if (!checkCharacters(e.target.value, 10)) {
-      setError(true);
-    } else setError(false);
-  }
-  function changeHandlerForChatAbout(e) {
-    setChatAbout(e.target.value);
-    if (!checkCharacters(e.target.value, 10)) {
-      setError(true);
-    } else setError(false);
-  }
   function changeHandlerForChatPhoto(e) {
     setChatImg(e.target.files[0]);
   }
 
   async function submitHandler(e) {
     e.preventDefault();
+    setLoading(true);
     if (error) {
+      setLoading(false);
+      console.log(error);
       return;
     }
-    setError(false);
-    setLoading(true);
     console.log("submitting chat Details");
     if (!(chatName && chatAbout && chatImg)) {
       setError(true);
       return;
     }
-    const id = await generateNewChat(getUserId(), chatName, chatAbout, chatImg);
-    setChatId(id);
-    setLoading(false);
+    try {
+      const id = await generateNewChat(
+        getUserId(),
+        chatName,
+        chatAbout,
+        chatImg
+      );
+      setChatId(id);
+    } catch (error) {
+      console.error("error while submiting");
+
+      setLoading(false);
+    }
   }
   return (
     <>
@@ -79,58 +75,26 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
         />
       ) : (
         <form className="newChat">
-          <span className="flex">
-            <label htmlFor="chat-name">
-              Chat name{" "}
-              <span style={{ fontSize: "smaller", color: "grey" }}>
-                (only 10 characters)
-              </span>
-            </label>
-            <input
-              style={{
-                border: error ? "thin solid red" : "",
-              }}
-              ref={chatNameRef}
-              type="text"
-              name="Chat name"
-              id="chat-name"
-              placeholder="Chat name"
-              value={chatName}
-              onChange={changeHandlerForChatName}
-              required
-              autoComplete="off"
-              autoCorrect="false"
-            />
-          </span>
-          <span className="flex">
-            <label htmlFor="chat-name">
-              Chat About{" "}
-              <span style={{ fontSize: "smaller", color: "grey" }}>
-                (only 10 characters)
-              </span>
-            </label>
-            <input
-              style={{
-                border: error ? "thin solid red" : "",
-              }}
-              type="text"
-              name="Chat about"
-              id="chat-about"
-              placeholder="This chat is about..."
-              value={chatAbout}
-              onChange={changeHandlerForChatAbout}
-              required
-              autoComplete="off"
-              autoCorrect="false"
-            />
-          </span>
-          <span className="flex">
+          <Input
+            value={chatName}
+            setValue={setChatName}
+            error={error}
+            setError={setError}
+            label="chat name"
+          />
+          <Input
+            value={chatAbout}
+            setValue={setChatAbout}
+            error={error}
+            setError={setError}
+            label="chat about"
+          />
+          <div className="flex">
             <label htmlFor="chat-photo">Chat Photo</label>
             <input
               style={{
                 border: error ? "thin solid red" : "",
               }}
-              ref={chatImgRef}
               type="file"
               name="Chat Photo"
               id="chat-photo"
@@ -138,7 +102,7 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
               onChange={changeHandlerForChatPhoto}
               required
             />
-          </span>
+          </div>
           <button
             type="submit"
             className="submit-button"
@@ -152,3 +116,38 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   );
 };
 export default NewChatForm;
+
+function Input({ value, setValue, error, setError, label }) {
+  function changeHandler(e) {
+    setValue(e.target.value);
+    if (!checkCharacters(e.target.value, 10)) {
+      setError(true);
+    } else setError(false);
+  }
+  return (
+    <>
+      <label htmlFor={label}>
+        {label}
+        <span
+          style={{ marginLeft: "10px", fontSize: "smaller", color: "grey" }}
+        >
+          (only 10 characters)
+        </span>
+      </label>
+      <input
+        style={{
+          border: error ? "thin solid red" : "",
+        }}
+        type="text"
+        name={label}
+        id={label}
+        value={value}
+        placeholder={label}
+        onChange={changeHandler}
+        required
+        autoComplete="off"
+        autoCorrect="false"
+      />
+    </>
+  );
+}

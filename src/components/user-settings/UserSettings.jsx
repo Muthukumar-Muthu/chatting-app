@@ -1,7 +1,7 @@
 import "./style.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/services/auth";
+import { auth } from "../../firebase/config";
 import DropDown from "../drop-down/DropDown";
 const UserSettings = () => {
   return (

@@ -8,7 +8,7 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 
 export default async function joinChat(userId, chatId) {
   const chatDetail = await getChatDetail(chatId);

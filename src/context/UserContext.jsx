@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import Preloader from "../components/preloader/preloader";
-import { auth } from "../firebase/services/auth";
+import { auth } from "../firebase/config";
 const UserContext = createContext();
 
 function UserContextProvider({ children }) {

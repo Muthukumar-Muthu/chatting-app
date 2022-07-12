@@ -6,7 +6,7 @@ import {
   onSnapshot,
   query,
 } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 import { getUserId } from "./getUserDetailsFromAuth";
 export default async function getUserDetailsFromDb(
   uid,

@@ -1,5 +1,5 @@
 import { ref, getDownloadURL } from "firebase/storage";
-import { storageDb } from "../services/storage";
+import { storageDb } from "../config";
 import noUserPhoto from "../../assests/user-photo.jpeg";
 export async function getChatImgUrl(path) {
   console.log(path);

@@ -1,5 +1,5 @@
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 
 export default async function updateChatDetail(chatId, chatImgUrl) {
   try {

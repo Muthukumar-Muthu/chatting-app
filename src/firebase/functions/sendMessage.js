@@ -5,7 +5,7 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../firebase/services/firestore";
+import { db } from "../../firebase/config";
 export default async function sendMessage(userId, chatObj, chatId, text) {
   try {
     if (!text) throw new Error("Empty message. Not sending the message");

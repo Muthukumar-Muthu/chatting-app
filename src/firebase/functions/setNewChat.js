@@ -1,5 +1,5 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 import uploadChatPhotoToDb from "./uploadChatPhotoToDb";
 import updateChatDetail from "./UpdateChatDetail";
 export default async function setNewChat(

@@ -1,5 +1,5 @@
 import { ref, uploadBytes } from "firebase/storage";
-import { storageDb } from "../services/storage";
+import { storageDb } from "../config";
 export default async function uploadChatPhotoToDb(file, path) {
   console.log("uploading file");
   let result = "";

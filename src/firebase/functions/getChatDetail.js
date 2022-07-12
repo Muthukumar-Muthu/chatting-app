@@ -1,5 +1,5 @@
 import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 import { getChatImgUrl } from "./getChatImgUrl";
 export default async function getChatDetail(chatId, setChat) {
   let unSubcribe = {};

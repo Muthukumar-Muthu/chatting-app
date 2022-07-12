@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 
 export async function getChat(chatId, setMessages) {
   console.log(chatId);

@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../services/firestore";
+import { db } from "../config";
 import setNewChat from "./setNewChat";
 
 async function generateNewChat(uid, chatName, chatAbout, chatPhoto) {

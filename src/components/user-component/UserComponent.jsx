@@ -11,7 +11,7 @@ import {
   getUserPhotoUrl,
 } from "../../firebase/functions/getUserDetailsFromAuth";
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase/services/firestore";
+import { db } from "../../firebase/config";
 import uploadChatPhotoToDb from "../../firebase/functions/uploadChatPhotoToDb";
 import { getChatImgUrl } from "../../firebase/functions/getChatImgUrl";
 import UserPhoto from "../../assests/user-photo.jpeg";

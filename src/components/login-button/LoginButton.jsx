@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../firebase/services/auth";
+import { auth } from "../../firebase/config";
 import "./style.css";
 const LoginButton = ({ callBack = () => {} }) => {
   async function loginHandler() {

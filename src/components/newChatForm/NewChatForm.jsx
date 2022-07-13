@@ -1,47 +1,64 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import generateNewChat from "../../firebase/functions/generateNewChat";
-import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
-import checkCharacters from "../../functions/checkCharacter";
+
+import { generateNewChat } from "../../firebase/functions";
 import Copyable from "../copyable/Copyable";
 import "./style.css";
 const NewChatForm = ({ setOpenModal, openModal }) => {
-  const [chatName, setChatName] = useState("");
-  const [chatAbout, setChatAbout] = useState("");
-  const [chatImg, setChatImg] = useState(null);
   const [chatId, setChatId] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
-  function changeHandlerForChatPhoto(e) {
-    setChatImg(e.target.files[0]);
+  const [formData, setFormData] = useState({
+    error: "",
+  });
+
+  function changeHandler(e, type = "") {
+    const value = e.target.value;
+    const name = e.target.name;
+    if (type.includes("file")) {
+      const file = e.target.files[0];
+      setFormData((p) => ({
+        ...p,
+
+        [name]: file,
+      }));
+    } else {
+      if (value.length > 10) {
+        return;
+      } else {
+        setFormData((p) => ({
+          ...p,
+
+          [name]: value,
+        }));
+      }
+    }
   }
+  console.log(loading, "loading");
 
+  if (formData.error) {
+    setTimeout(() => {
+      console.log("changing error");
+      setFormData((p) => ({ ...p, error: false }));
+    }, 1000);
+  }
   async function submitHandler(e) {
     e.preventDefault();
     setLoading(true);
-    if (error) {
-      setLoading(false);
-      console.log(error);
-      return;
-    }
     console.log("submitting chat Details");
-    if (!(chatName && chatAbout && chatImg)) {
-      setError(true);
-      return;
-    }
-    try {
-      const id = await generateNewChat(
-        getUserId(),
-        chatName,
-        chatAbout,
-        chatImg
-      );
-      setChatId(id);
-    } catch (error) {
-      console.error("error while submiting");
-
+    const { chatName, chatAbout, chatImage } = formData;
+    if (!(chatName && chatAbout && chatImage)) {
+      setFormData((p) => ({ ...p, error: true }));
       setLoading(false);
+    } else {
+      console.log("correct form data");
+      try {
+        const id = await generateNewChat(chatName, chatAbout, chatImage);
+        setLoading(false);
+        setChatId(id);
+      } catch (error) {
+        console.error("error while submiting");
+      }
     }
   }
   return (
@@ -76,30 +93,30 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
       ) : (
         <form className="newChat">
           <Input
-            value={chatName}
-            setValue={setChatName}
-            error={error}
-            setError={setError}
+            data={formData}
+            changeHandler={changeHandler}
             label="chat name"
+            id="chatName"
           />
           <Input
-            value={chatAbout}
-            setValue={setChatAbout}
-            error={error}
-            setError={setError}
+            data={formData}
+            changeHandler={changeHandler}
             label="chat about"
+            id="chatAbout"
           />
           <div className="flex">
             <label htmlFor="chat-photo">Chat Photo</label>
             <input
               style={{
-                border: error ? "thin solid red" : "",
+                border: formData.error ? "thin solid red" : "",
               }}
               type="file"
-              name="Chat Photo"
               id="chat-photo"
               accept="image/png, image/jpeg"
-              onChange={changeHandlerForChatPhoto}
+              name="chatImage"
+              onChange={(e) => {
+                changeHandler(e, "file");
+              }}
               required
             />
           </div>
@@ -117,16 +134,13 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
 };
 export default NewChatForm;
 
-function Input({ value, setValue, error, setError, label }) {
-  function changeHandler(e) {
-    setValue(e.target.value);
-    if (!checkCharacters(e.target.value, 10)) {
-      setError(true);
-    } else setError(false);
-  }
+function Input({ data, changeHandler, label, id }) {
+  const { [label]: value, error } = data;
+  console.log(error);
+
   return (
     <>
-      <label htmlFor={label}>
+      <label htmlFor={id}>
         {label}
         <span
           style={{ marginLeft: "10px", fontSize: "smaller", color: "grey" }}
@@ -139,8 +153,8 @@ function Input({ value, setValue, error, setError, label }) {
           border: error ? "thin solid red" : "",
         }}
         type="text"
-        name={label}
-        id={label}
+        id={id}
+        name={id}
         value={value}
         placeholder={label}
         onChange={changeHandler}

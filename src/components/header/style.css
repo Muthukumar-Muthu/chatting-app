@@ -2,26 +2,16 @@
   display: flex;
   padding: 0.75em;
   background-color: #f0f2f5;
-  align-items: center;
-}
-.header .settings {
-  margin-left: auto;
-  border: none;
-  cursor: pointer;
-  padding: 0.5em;
-  background: inherit;
-}
-.header .profile-picture {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
+  justify-content: space-between;
 }
 .header img {
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
+  margin-left: 5px;
+  width: 35px;
+  height: 35px;
   -o-object-fit: contain;
      object-fit: contain;
   -o-object-position: center;
      object-position: center;
+  cursor: pointer;
+  border-radius: 50%;
 }/*# sourceMappingURL=style.css.map */

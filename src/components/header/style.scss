@@ -2,24 +2,14 @@
   display: flex;
   padding: 0.75em;
   background-color: #f0f2f5;
-  align-items: center;
-  .settings {
-    margin-left: auto;
-    border: none;
-    cursor: pointer;
-    padding: 0.5em;
-    background: inherit;
-  }
-  .profile-picture {
+  justify-content: space-between;
+  img {
+    margin-left: 5px;
     width: 35px;
     height: 35px;
-    cursor: pointer;
-  }
-  img {
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
     object-fit: contain;
     object-position: center;
+    cursor: pointer;
+    border-radius: 50%;
   }
 }

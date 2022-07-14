@@ -135,7 +135,7 @@ export default async function joinChat(chatId) {
         chatId: chatId,
       });
       await updateChatObj(chatId, chatDetail);
-    } else throw new Error(`chat already presented`);
+    } else throw new Error(`chat invalid`);
   } catch (e) {
     console.warn(e);
   }
@@ -158,13 +158,17 @@ async function checkChatList(chatId) {
     collection(db, `users/${userId}/chats`),
     where("chatId", "==", chatId)
   );
+
+  const docObj = await getDoc(doc(db, `chats/${chatId}`));
+  if (!Object.keys(docObj.data())) {
+    console.warn(`chat not found ${chatId}`);
+    return false;
+  }
   const snap = await getDocs(q);
-  console.log("checking chatList");
-  snap.forEach((doc) => {
+  if (snap.size) {
     chatPresented = true;
-    console.log(doc.data());
-  });
-  console.warn(chatPresented);
+  }
+
   return chatPresented;
 }
 

@@ -6,6 +6,8 @@ import useChat from "../../hooks/useChat";
 import { getChatImgUrl } from "../../firebase/functions";
 import { useState } from "react";
 const Chat = ({ chatId }) => {
+  const [imgSrc, setImgSrc] = useState("");
+  const { chat: showChat, setChat: setShowChat } = useChat();
   const {
     data: chat,
     loading,
@@ -15,14 +17,13 @@ const Chat = ({ chatId }) => {
     type: "doc",
     state: 1,
   });
-  const [imgSrc, setImgSrc] = useState("");
-  const { chat: showChat, setChat: setShowChat } = useChat();
 
-  let { name, about, lastUpdate, imgUrl } = chat;
+  const { name, about, lastUpdate, imgUrl } = chat;
 
   getChatImgUrl(imgUrl).then((url) => {
     setImgSrc(url);
   });
+
   const [date, time] = timeStampToDate(lastUpdate);
 
   function clickHandler() {

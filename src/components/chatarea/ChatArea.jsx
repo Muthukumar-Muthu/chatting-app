@@ -2,19 +2,27 @@ import "./style.css";
 import Message from "../message/Message";
 import { useEffect, useState } from "react";
 import { getChat } from "../../firebase/functions/getChat";
-const ChatArea = ({ showChat }) => {
-  const [messages, setMessages] = useState([]);
-  useEffect(() => {
-    if (showChat.chatId) {
-      getChat(showChat.chatId, setMessages);
-    }
-  }, [showChat]);
-  console.log("showchat", showChat);
+import useListen from "../../hooks/useListen";
+import { orderBy, query } from "firebase/firestore";
+const ChatArea = ({ chat }) => {
+  const { chatId } = chat;
+  const {
+    data: messages,
+    loading,
+    error,
+  } = useListen({
+    path: `chats/${chatId}/chats`,
+    state: chat,
+    type: "collection",
+    condition: [orderBy("time", "asc")],
+  });
+
+  console.log("chat", messages);
 
   return (
     <section className="chat-area">
-      {messages.map((message, index) => (
-        <Message key={index} {...message} />
+      {messages.map((message) => (
+        <Message key={message.docId} {...message} />
       ))}
     </section>
   );

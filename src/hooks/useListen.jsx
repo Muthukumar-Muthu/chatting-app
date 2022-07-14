@@ -4,10 +4,13 @@ import {
   onSnapshot,
   getFirestore,
   query,
+  orderBy,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-export default function useListen({ path, state, type }) {
+export default function useListen({ path, state, type, condition = [] }) {
+  console.log(path);
+
   const [data, setData] = useState({
     data: type === "collection" ? [] : {},
     error: null,
@@ -17,7 +20,7 @@ export default function useListen({ path, state, type }) {
   useEffect(() => {
     let unsub = null;
     if (state) {
-      unsub = listen({ path, type, setData });
+      unsub = listen({ path, type, setData, condition });
     }
     return unsub;
   }, [state]);
@@ -25,10 +28,13 @@ export default function useListen({ path, state, type }) {
   return data;
 }
 
-function listen({ path, setData, type }) {
+function listen({ path, setData, type, condition }) {
   let q = null,
     unsub = null;
   try {
+    if (!path) {
+      throw new Error("path undefined");
+    }
     if (type === "doc") {
       q = query(doc(getFirestore(), path));
       unsub = onSnapshot(
@@ -47,7 +53,9 @@ function listen({ path, setData, type }) {
         }
       );
     } else if (type === "collection") {
-      q = query(collection(getFirestore(), path));
+      if (Object.keys(condition).length > 0) {
+        q = query(collection(getFirestore(), path), ...condition);
+      } else q = query(collection(getFirestore(), path));
       unsub = onSnapshot(
         q,
         (snapshot) => {

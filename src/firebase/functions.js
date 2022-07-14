@@ -94,3 +94,28 @@ export async function getChatImgUrl(path) {
     return noUserPhoto;
   }
 }
+export async function sendMessage(chatId, text) {
+  const userId = getUserId();
+  try {
+    if (!text) throw new Error("Empty message. Not sending the message");
+    await addDoc(collection(db, `chats/${chatId}/chats`), {
+      senderId: userId,
+      text,
+      time: serverTimestamp(),
+    });
+  } catch (error) {
+    console.warn(error);
+  }
+}
+
+async function updateChatObjWithRecentMsg(chatId, text, chatObj) {
+  try {
+    await updateDoc(doc(db, `chats/${chatId}/`), {
+      ...chatObj,
+      lastUpdateTime: serverTimestamp(),
+      recentMsg: text,
+    });
+  } catch (error) {
+    console.warn(error);
+  }
+}

@@ -1,17 +1,17 @@
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState } from "react";
-import sendMessage from "../../firebase/functions/sendMessage";
-import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
+import { sendMessage } from "../../firebase/functions";
 import "./style.css";
-const TypeArea = ({ showChat }) => {
-  const { chatId } = showChat;
+const TypeArea = ({ chat }) => {
+  const { chatId } = chat;
   const [typedMessage, setTypedMessage] = useState("");
   useEffect(() => {
     setTypedMessage("");
-  }, [showChat]);
+  }, [chat]);
+
   function formSubmit(e) {
     e.preventDefault();
-    sendMessage(getUserId(), showChat, chatId, typedMessage);
+    sendMessage(chatId, typedMessage);
     setTypedMessage("");
   }
   return (

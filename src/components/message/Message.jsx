@@ -1,7 +1,7 @@
 import "./style.css";
 import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
 import timeStampToDate from "../../firebase/functions/timeStampToDate";
-const Message = ({ messageContent, senderId, time }) => {
+const Message = ({ text, senderId, time }) => {
   const chatTime = timeStampToDate(time);
   const loggedUserId = getUserId();
   return (
@@ -11,7 +11,7 @@ const Message = ({ messageContent, senderId, time }) => {
         " message"
       }
     >
-      <span className="text">{messageContent}</span>
+      <span className="text">{text}</span>
       <span className="time">{chatTime.join(" ")}</span>
     </div>
   );

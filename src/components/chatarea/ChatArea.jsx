@@ -17,8 +17,6 @@ const ChatArea = ({ chat }) => {
     condition: [orderBy("time", "asc")],
   });
 
-  console.log("chat", messages);
-
   return (
     <section className="chat-area">
       {messages.map((message) => (

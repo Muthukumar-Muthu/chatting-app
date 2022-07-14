@@ -4,13 +4,10 @@ import {
   onSnapshot,
   getFirestore,
   query,
-  orderBy,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function useListen({ path, state, type, condition = [] }) {
-  console.log(path);
-
   const [data, setData] = useState({
     data: type === "collection" ? [] : {},
     error: null,

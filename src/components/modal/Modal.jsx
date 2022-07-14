@@ -3,8 +3,6 @@ import "./style.css";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 export default function BasicModal({ openModal, component, setOpenModal }) {
-  console.log(openModal);
-
   return (
     <div
       className="modal-wrapper"

@@ -34,25 +34,24 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
       }
     }
   }
-  console.log(loading, "loading");
 
   if (formData.error) {
     setTimeout(() => {
-      console.log("changing error");
       setFormData((p) => ({ ...p, error: false }));
     }, 1000);
   }
   async function submitHandler(e) {
     e.preventDefault();
     setLoading(true);
-    console.log("submitting chat Details");
+
     const { chatName, chatAbout, chatImage } = formData;
     if (!(chatName && chatAbout && chatImage)) {
       setFormData((p) => ({ ...p, error: true }));
       setLoading(false);
     } else {
-      console.log("correct form data");
       try {
+        console.log("Generating new chat");
+
         const id = await generateNewChat(chatName, chatAbout, chatImage);
         setLoading(false);
         setChatId(id);
@@ -136,7 +135,6 @@ export default NewChatForm;
 
 function Input({ data, changeHandler, label, id }) {
   const { [label]: value, error } = data;
-  console.log(error);
 
   return (
     <>

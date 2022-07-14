@@ -3,7 +3,8 @@ import "./style.css";
 import timeStampToDate from "../../firebase/functions/timeStampToDate";
 import useListen from "../../hooks/useListen";
 import useChat from "../../hooks/useChat";
-
+import { getChatImgUrl } from "../../firebase/functions";
+import { useState } from "react";
 const Chat = ({ chatId }) => {
   const {
     data: chat,
@@ -14,14 +15,15 @@ const Chat = ({ chatId }) => {
     type: "doc",
     state: 1,
   });
-
+  const [imgSrc, setImgSrc] = useState("");
   const { chat: showChat, setChat: setShowChat } = useChat();
 
-  const chatName = chat.chatDetails?.name;
-  const lastUpdate = chat.chatDetails?.lastUpdate;
-  const chatAbout = chat.chatDetails?.about;
+  let { name, about, lastUpdate, imgUrl } = chat;
+
+  getChatImgUrl(imgUrl).then((url) => {
+    setImgSrc(url);
+  });
   const [date, time] = timeStampToDate(lastUpdate);
-  console.log(chatName, date, time);
 
   function clickHandler() {
     if (showChat?.chatId !== chatId) setShowChat({ chatId, ...chat });
@@ -35,16 +37,16 @@ const Chat = ({ chatId }) => {
       onClick={clickHandler}
     >
       <div className="chat-image">
-        <img src={""} alt="chat" />
+        <img src={imgSrc} alt="chat" />
       </div>
       <div className="chat-details">
         <h2
           className="chat-heading"
           style={{ height: "1.5em", overflow: "hidden", display: "grid" }}
         >
-          {chatName}
+          {name}
         </h2>
-        <p className="chat-msg">{chatAbout}</p>
+        <p className="chat-msg">{about}</p>
       </div>
       <div className="time">
         <span>{date}</span>

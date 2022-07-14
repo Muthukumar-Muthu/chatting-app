@@ -1,4 +1,4 @@
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   addDoc,
   doc,
@@ -7,6 +7,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
+import noUserPhoto from "../assests/user-photo.jpeg";
 import { auth, db, storageDb } from "../firebase/config";
 
 export function getUserId() {
@@ -24,7 +25,6 @@ export function getUserName() {
 export async function generateNewChat(chatName, chatAbout, chatPhoto) {
   const uid = getUserId();
   try {
-    console.log(`creating new chat for uid ${uid}`);
     //creating new chat
     const chatId = await createChat(chatName, chatAbout, chatPhoto);
     //add that chat to owner
@@ -42,10 +42,10 @@ export async function createChat(
 ) {
   const uid = getUserId();
   const response = await addDoc(collection(db, `chats`), {
-    imgurl: null,
+    imgUrl: null,
     name: chatName,
     recentMsg: "",
-    chatAbout: chatAbout,
+    about: chatAbout,
     createdAt: serverTimestamp(),
     createdBy: uid,
     lastUpdate: serverTimestamp(),
@@ -63,7 +63,7 @@ export async function createChat(
 export async function updateChatDetail(chatId, chatImgUrl) {
   try {
     await updateDoc(doc(db, `chats/${chatId}`), {
-      chatImg: chatImgUrl,
+      imgUrl: chatImgUrl,
     });
     return true;
   } catch (error) {
@@ -73,17 +73,24 @@ export async function updateChatDetail(chatId, chatImgUrl) {
 }
 
 export async function uploadChatPhotoToDb(file, path) {
-  console.log("uploading file");
   let result = "";
   try {
     const storageRef = ref(storageDb, path);
-    console.log("wait uploading");
-    result = await uploadBytes(storageRef, file);
-    console.log("uploaded");
 
-    console.log("imgPath", result.ref._location.path_);
+    result = await uploadBytes(storageRef, file);
+
     return result.ref._location.path_;
   } catch (error) {
     console.warn(error);
+  }
+}
+
+export async function getChatImgUrl(path) {
+  try {
+    const response = await getDownloadURL(ref(storageDb, path));
+    return response;
+  } catch (error) {
+    console.warn("null path for chatImg", path);
+    return noUserPhoto;
   }
 }

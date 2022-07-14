@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import LoginButton from "../../components/login-button/LoginButton";
-import joinChat from "../../firebase/functions/joinChat";
-import { getUserId } from "../../firebase/functions/getUserDetailsFromAuth";
+import joinChat from "../../firebase/functions";
+
 const ChatPage = () => {
   const { chatId } = useParams();
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const ChatPage = () => {
     <div>
       <LoginButton
         callBack={() => {
-          joinChat(getUserId(), chatId).then(navigate("/"));
+          joinChat(chatId).then(navigate("/"));
         }}
       />
     </div>

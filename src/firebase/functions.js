@@ -5,6 +5,11 @@ import {
   updateDoc,
   collection,
   serverTimestamp,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
 } from "firebase/firestore";
 
 import noUserPhoto from "../assests/user-photo.jpeg";
@@ -107,7 +112,7 @@ export async function sendMessage(chatId, text) {
     console.warn(error);
   }
 }
-
+/*
 async function updateChatObjWithRecentMsg(chatId, text, chatObj) {
   try {
     await updateDoc(doc(db, `chats/${chatId}/`), {
@@ -117,5 +122,63 @@ async function updateChatObjWithRecentMsg(chatId, text, chatObj) {
     });
   } catch (error) {
     console.warn(error);
+  }
+}
+*/
+export default async function joinChat(chatId) {
+  const userId = getUserId();
+  try {
+    const chatDetail = await getChatDetail(chatId);
+    const chatPresented = await checkChatList(userId, chatId);
+    if (!chatPresented) {
+      await addDoc(collection(db, `users/${userId}/chats`), {
+        chatId: chatId,
+      });
+      await updateChatObj(chatId, chatDetail);
+    } else throw new Error(`chat already presented`);
+  } catch (e) {
+    console.warn(e);
+  }
+  async function getChatDetail(chatId) {
+    try {
+      const snapshot = await getDoc(doc(db, `chats/${chatId}`));
+      return snapshot.data();
+    } catch (error) {
+      console.log("while getting chatDetail");
+      console.warn(error);
+      throw error;
+    }
+  }
+}
+async function checkChatList(chatId) {
+  const userId = getUserId();
+  console.log(`checking chat List`);
+  let chatPresented = false;
+  const q = query(
+    collection(db, `users/${userId}/chats`),
+    where("chatId", "==", chatId)
+  );
+  const snap = await getDocs(q);
+  console.log("checking chatList");
+  snap.forEach((doc) => {
+    chatPresented = true;
+    console.log(doc.data());
+  });
+  console.warn(chatPresented);
+  return chatPresented;
+}
+
+async function updateChatObj(chatId, chatDetail) {
+  const userId = getUserId();
+  try {
+    const updatedMembersId = [...chatDetail.membersId, userId];
+    console.log(updatedMembersId);
+
+    await setDoc(doc(db, "chats", chatId), {
+      ...chatDetail,
+      membersId: updatedMembersId,
+    });
+  } catch (error) {
+    console.log(error, "while updating the chtdetai");
   }
 }

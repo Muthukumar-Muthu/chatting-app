@@ -63,32 +63,27 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   return (
     <>
       {chatId ? (
-        <Copyable
-          content={
-            <div>
-              <h2
-                style={{
-                  textAlign: "center",
-                  marginBlock: "0.25em",
-                  paddingBlock: "0.5em",
-                  border: "1px solid lightgrey",
-                }}
-              >
-                Share this Link with your Friends🤞
-              </h2>
-              <Link
-                style={{
-                  fontSize: "medium",
-                }}
-                target={"_blank"}
-                to={`chat/${chatId}`}
-              >
-                {window.location.hostname + `/chat/${chatId}`}
-              </Link>
-            </div>
-          }
-          copyContent={window.location.hostname + `/chat/${chatId}`}
-        />
+        <div>
+          <h2
+            style={{
+              textAlign: "center",
+              marginBlock: "0.25em",
+              paddingBlock: "0.5em",
+              border: "1px solid lightgrey",
+            }}
+          >
+            Share this Link with your Friends🤞
+          </h2>
+          <Link
+            style={{
+              fontSize: "medium",
+            }}
+            target={"_blank"}
+            to={`chat/${chatId}`}
+          >
+            {window.location.hostname + `/chat/${chatId}`}
+          </Link>
+        </div>
       ) : (
         <form className="newChat">
           <Input

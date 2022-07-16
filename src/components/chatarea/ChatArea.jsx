@@ -1,27 +1,55 @@
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+
 import "./style.css";
 import Message from "../message/Message";
-import { useEffect, useState } from "react";
-import { getChat } from "../../firebase/functions/getChat";
-import useListen from "../../hooks/useListen";
-import { orderBy, query } from "firebase/firestore";
-const ChatArea = ({ chat }) => {
-  const { chatId } = chat;
-  const {
-    data: messages,
-    loading,
-    error,
-  } = useListen({
-    path: `chats/${chatId}/chats`,
-    state: chat,
-    type: "collection",
-    condition: [orderBy("time", "asc")],
+import useChat from "../../hooks/useChat";
+import Preloader from "../preloader/preloader";
+import { db } from "../../firebase/config";
+const ChatArea = () => {
+  const { chatId } = useChat();
+  const [messages, setMessages] = useState({
+    data: [],
+    loading: true,
+    error: null,
   });
 
+  useEffect(() => {
+    function listenMessages() {
+      let q = query(
+        collection(db, `chats/${chatId}/chats`),
+        orderBy("time", "asc")
+      );
+      onSnapshot(
+        q,
+        (snapshot) => {
+          const data = [];
+          snapshot.forEach((doc) => {
+            data.push({ ...doc.data(), docId: doc.id });
+          });
+          setMessages((p) => ({
+            ...p,
+            data: data,
+            loading: false,
+          }));
+        },
+        (error) => {
+          console.error(error);
+          setMessages((p) => ({ ...p, error, loading: false }));
+        }
+      );
+    }
+    listenMessages();
+  }, [chatId]);
   return (
     <section className="chat-area">
-      {messages.map((message) => (
-        <Message key={message.docId} {...message} />
-      ))}
+      {messages.loading ? (
+        <Preloader />
+      ) : (
+        messages.data.map((message) => (
+          <Message key={message.docId} {...message} />
+        ))
+      )}
     </section>
   );
 };

@@ -4,7 +4,7 @@ const ChatContext = createContext();
 
 function ChatContextProvider({ children }) {
   const { Provider } = ChatContext;
-  const [chat, setChat] = useState({});
+  const [chat, setChat] = useState(null);
 
   return (
     <Provider

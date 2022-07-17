@@ -9,7 +9,10 @@ const NewChatForm = () => {
     error: null,
     loading: true,
   });
-  const { data: chatId, loading } = newChat;
+  const {
+    data: { chatId },
+    loading,
+  } = newChat;
   const [formData, setFormData] = useState({
     error: "",
   });
@@ -54,7 +57,7 @@ const NewChatForm = () => {
       const { chatName, chatAbout, chatImage } = formData;
       console.log("Generating new chat");
       const id = await generateNewChat(chatName, chatAbout, chatImage);
-      setNewChat((p) => ({ ...p, loading: false, chatId: id }));
+      setNewChat((p) => ({ ...p, loading: false, data: { chatId: id } }));
     } catch (error) {
       console.error("error while submiting");
     }

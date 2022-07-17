@@ -2,7 +2,7 @@ import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 import "./style.css";
 
-export default function BasicModal({ component, modal, closeModal }) {
+export default function BasicModal({ Component, modal, closeModal }) {
   return (
     <div
       className="modal-wrapper"
@@ -11,7 +11,7 @@ export default function BasicModal({ component, modal, closeModal }) {
       }}
     >
       <div className="modal">
-        <component />
+        <Component />
         <div className="close-button" onClick={closeModal}>
           <CancelPresentationIcon />
         </div>

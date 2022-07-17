@@ -19,12 +19,11 @@ const Chat = ({ chatId }) => {
   const [date, time] = timeStampToDate(lastUpdate);
 
   useEffect(() => {
-    function listenChat() {
+    async function listenChat() {
       onSnapshot(
         doc(db, `chats/${chatId}`),
         (doc) => {
           const data = doc.data();
-
           setChat((p) => ({
             ...p,
             data: { ...data, docId: doc.id },
@@ -38,12 +37,16 @@ const Chat = ({ chatId }) => {
       );
     }
     listenChat().then(() => {
-      getChatImgUrl(imgUrl).then((url) => {
-        setChat((p) => ({
-          ...p,
-          data: { ...p.data, imgUrl },
-        }));
-      });
+      console.log(`here`);
+
+      if (imgUrl) {
+        getChatImgUrl(imgUrl).then((url) => {
+          setChat((p) => ({
+            ...p,
+            data: { ...p.data, imgUrl: url },
+          }));
+        });
+      }
     });
     return () => {};
   }, [chatId]);

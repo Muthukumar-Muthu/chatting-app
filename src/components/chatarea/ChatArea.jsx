@@ -7,7 +7,8 @@ import useChat from "../../hooks/useChat";
 import Preloader from "../preloader/preloader";
 import { db } from "../../firebase/config";
 const ChatArea = () => {
-  const { chatId } = useChat();
+  const { chat } = useChat();
+  const chatId = chat?.chatId;
   const [messages, setMessages] = useState({
     data: [],
     loading: true,

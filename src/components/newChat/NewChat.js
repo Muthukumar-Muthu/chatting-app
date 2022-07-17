@@ -10,9 +10,9 @@ const NewChat = () => {
   return (
     <div className="new-chat">
       <button onClick={openModal}>Create a new Chat</button>
-      {openModal && (
+      {modal && (
         <BasicModal
-          component={NewChatForm}
+          Component={NewChatForm}
           modal={modal}
           openModal={openModal}
           closeModal={closeModal}

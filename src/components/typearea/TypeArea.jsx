@@ -4,7 +4,8 @@ import { sendMessage } from "../../firebase/functions";
 import useChat from "../../hooks/useChat";
 import "./style.css";
 const TypeArea = () => {
-  const { chatId } = useChat();
+  const { chat } = useChat();
+  const chatId = chat?.chatId;
   const [typedMessage, setTypedMessage] = useState("");
   useEffect(() => {
     setTypedMessage("");

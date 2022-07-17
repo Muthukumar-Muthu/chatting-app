@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { generateNewChat } from "../../firebase/functions";
-import Copyable from "../copyable/Copyable";
 import "./style.css";
-const NewChatForm = ({ setOpenModal, openModal }) => {
-  const [chatId, setChatId] = useState("");
-  const [loading, setLoading] = useState(false);
-
+const NewChatForm = () => {
+  const [newChat, setNewChat] = useState({
+    data: {},
+    error: null,
+    loading: false,
+  });
+  const {
+    data: { chatId },
+    loading,
+  } = newChat;
   const [formData, setFormData] = useState({
     error: "",
   });
@@ -28,7 +33,6 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
       } else {
         setFormData((p) => ({
           ...p,
-
           [name]: value,
         }));
       }
@@ -42,22 +46,20 @@ const NewChatForm = ({ setOpenModal, openModal }) => {
   }
   async function submitHandler(e) {
     e.preventDefault();
-    setLoading(true);
-
-    const { chatName, chatAbout, chatImage } = formData;
-    if (!(chatName && chatAbout && chatImage)) {
-      setFormData((p) => ({ ...p, error: true }));
-      setLoading(false);
+    setNewChat((p) => ({ ...p, loading: true }));
+    const result = validateField(formData);
+    if (!result) {
+      setFormData((p) => ({ ...p, error: result.field }));
+      setNewChat((p) => ({ ...p, loading: false }));
     } else {
-      try {
-        console.log("Generating new chat");
-
-        const id = await generateNewChat(chatName, chatAbout, chatImage);
-        setLoading(false);
-        setChatId(id);
-      } catch (error) {
-        console.error("error while submiting");
-      }
+    }
+    try {
+      const { chatName, chatAbout, chatImage } = formData;
+      console.log("Generating new chat");
+      const id = await generateNewChat(chatName, chatAbout, chatImage);
+      setNewChat((p) => ({ ...p, loading: false, data: { chatId: id } }));
+    } catch (error) {
+      console.error("error while submiting");
     }
   }
   return (
@@ -143,7 +145,7 @@ function Input({ data, changeHandler, label, id }) {
       </label>
       <input
         style={{
-          border: error ? "thin solid red" : "",
+          border: error.field ? "thin solid red" : "",
         }}
         type="text"
         id={id}
@@ -157,4 +159,13 @@ function Input({ data, changeHandler, label, id }) {
       />
     </>
   );
+}
+
+function validateField(object) {
+  for (const key of Object.keys(object)) {
+    if (!object[key])
+      return {
+        field: key,
+      };
+  }
 }

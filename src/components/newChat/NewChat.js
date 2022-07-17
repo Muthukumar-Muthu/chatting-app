@@ -4,18 +4,18 @@ import NewChatForm from "../newChatForm/NewChatForm";
 import BasicModal from "../modal/Modal";
 import "./style.css";
 const NewChat = () => {
-  const [openModal, setOpenModal] = useState(false);
-
+  const [modal, setModal] = useState(false);
+  const openModal = () => setModal(true);
+  const closeModal = () => setModal(false);
   return (
     <div className="new-chat">
-      <button onClick={() => setOpenModal(true)}>Create a new Chat</button>
-      {openModal && (
+      <button onClick={openModal}>Create a new Chat</button>
+      {modal && (
         <BasicModal
-          component={
-            <NewChatForm openModal={openModal} setOpenModal={setOpenModal} />
-          }
+          Component={NewChatForm}
+          modal={modal}
           openModal={openModal}
-          setOpenModal={setOpenModal}
+          closeModal={closeModal}
         />
       )}
     </div>

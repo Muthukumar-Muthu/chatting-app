@@ -1,33 +1,47 @@
-import "./style.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
 
+import "./style.css";
 import timeStampToDate from "../../firebase/functions/timeStampToDate";
-import useListen from "../../hooks/useListen";
 import useChat from "../../hooks/useChat";
 import { getChatImgUrl } from "../../firebase/functions";
-import { useState } from "react";
+import { db } from "../../firebase/config";
 const Chat = ({ chatId }) => {
-  const [imgSrc, setImgSrc] = useState("");
+  const [chat, setChat] = useState({
+    data: {},
+    loading: true,
+    error: false,
+  });
+
   const { chat: showChat, setChat: setShowChat } = useChat();
-  const {
-    data: chat,
-    loading,
-    error,
-  } = useListen({
-    path: `chats/${chatId}`,
-    type: "doc",
-    state: 1,
-  });
-
-  const { name, about, lastUpdate, imgUrl } = chat;
-
-  getChatImgUrl(imgUrl).then((url) => {
-    setImgSrc(url);
-  });
-
+  const { name, about, lastUpdate, imgUrl } = chat.data;
   const [date, time] = timeStampToDate(lastUpdate);
 
+  useEffect(() => {
+    async function listenChat() {
+      onSnapshot(
+        doc(db, `chats/${chatId}`),
+        (doc) => {
+          const data = doc.data();
+          setChat((p) => ({
+            ...p,
+            data: { ...data, docId: doc.id },
+            loading: false,
+          }));
+        },
+        (error) => {
+          console.error(error);
+          setChat((p) => ({ ...p, error, loading: false }));
+        }
+      );
+    }
+    listenChat();
+    return () => {};
+  }, [chatId]);
+
   function clickHandler() {
-    if (showChat?.chatId !== chatId) setShowChat({ chatId, ...chat });
+    if (showChat?.chatId !== chatId) setShowChat({ chatId, ...chat.data });
   }
   return (
     <div
@@ -38,7 +52,7 @@ const Chat = ({ chatId }) => {
       onClick={clickHandler}
     >
       <div className="chat-image">
-        <img src={imgSrc} alt="chat" />
+        <img src={imgUrl} alt="chat" />
       </div>
       <div className="chat-details">
         <h2

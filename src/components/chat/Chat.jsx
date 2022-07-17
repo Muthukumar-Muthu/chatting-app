@@ -36,18 +36,7 @@ const Chat = ({ chatId }) => {
         }
       );
     }
-    listenChat().then(() => {
-      console.log(`here`);
-
-      if (imgUrl) {
-        getChatImgUrl(imgUrl).then((url) => {
-          setChat((p) => ({
-            ...p,
-            data: { ...p.data, imgUrl: url },
-          }));
-        });
-      }
-    });
+    listenChat();
     return () => {};
   }, [chatId]);
 

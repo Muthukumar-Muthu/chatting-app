@@ -67,8 +67,9 @@ export async function createChat(
 
 export async function updateChatDetail(chatId, chatImgUrl) {
   try {
+    const resolvedUrl = await getChatImgUrl(chatImgUrl);
     await updateDoc(doc(db, `chats/${chatId}`), {
-      imgUrl: chatImgUrl,
+      imgUrl: resolvedUrl,
     });
     return true;
   } catch (error) {
@@ -126,63 +127,130 @@ async function updateChatObjWithRecentMsg(chatId, text, chatObj) {
 }
 */
 export default async function joinChat(chatId) {
-  const userId = getUserId();
+  console.log(`Joining Chat ${chatId}`);
   try {
-    const chatDetail = await getChatDetail(chatId);
-    const chatPresented = await checkChatList(userId, chatId);
-    if (!chatPresented) {
-      await addDoc(collection(db, `users/${userId}/chats`), {
-        chatId: chatId,
-      });
-      await updateChatObj(chatId, chatDetail);
-    } else throw new Error(`chat invalid`);
+    const chatData = await isChatExist(chatId);
+    console.log(chatData);
+    if (chatData) {
+      console.log(chatData, "chat Details");
+      const r = await userAlreadyAdded(chatId);
+      console.log(`user added satus ${r}`);
+      if (!r) {
+        console.log("user did not added");
+        const userAdded = await addUserToChat(chatId, chatData);
+        if (userAdded) {
+          console.log(`added user ${userAdded}`);
+
+          const r = await updateUserChats(chatId);
+        }
+      } else {
+        console.error(`user already exists on ${chatId}`);
+      }
+    } else {
+      console.log(`${chatData} chat does not exist`);
+      console.error(`${chatId} chat does not exist`);
+    }
+
+    // const chatDetail = await getChatDetail(chatId);
+    // const chatPresented = await checkChatList(userId, chatId);
+    // if (!chatPresented) {
+    //   await addDoc(collection(db, `users/${userId}/chats`), {
+    //     chatId: chatId,
+    //   });
+    //   await updateChatObj(chatId, chatDetail);
+    // } else throw new Error(`chat invalid`);
   } catch (e) {
     console.warn(e);
   }
-  async function getChatDetail(chatId) {
-    try {
-      const snapshot = await getDoc(doc(db, `chats/${chatId}`));
-      return snapshot.data();
-    } catch (error) {
-      console.log("while getting chatDetail");
-      console.warn(error);
-      throw error;
-    }
+}
+async function isChatExist(chatId) {
+  console.log(`getting chat details ${chatId}`);
+  const d = await getDoc(doc(db, `chats/${chatId}`));
+  if (d.exists()) {
+    console.log("Chat exists");
+    console.log(d.data());
+    return d.data();
+  } else return null;
+}
+async function addUserToChat(chatId, chatData) {
+  console.log("adding user in chatObject");
+  console.log(chatId, chatData);
+  const userId = getUserId();
+  try {
+    const { membersId } = chatData;
+    const updatedMembersId = [...new Set([...membersId, userId])];
+    await setDoc(doc(db, `chats/${chatId}`), {
+      ...chatData,
+      membersId: updatedMembersId,
+    });
+    console.log("added user to chatObject check in console.firebase.com");
+    return true;
+  } catch (error) {
+    console.log(error, "while updating the chatdetail");
+    return false;
   }
 }
-async function checkChatList(chatId) {
+async function updateUserChats(chatId) {
+  console.log(`updating user chats`);
   const userId = getUserId();
-  console.log(`checking chat List`);
-  let chatPresented = false;
+  try {
+    const r = await addDoc(collection(db, `users/${userId}/chats`), {
+      chatId,
+    });
+    console.log(`user chats done`);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function userAlreadyAdded(chatId) {
+  console.log("user already added");
+  const userId = getUserId();
   const q = query(
     collection(db, `users/${userId}/chats`),
     where("chatId", "==", chatId)
   );
-
-  const docObj = await getDoc(doc(db, `chats/${chatId}`));
-  if (!Object.keys(docObj.data())) {
-    console.warn(`chat not found ${chatId}`);
+  const d = await getDocs(q);
+  if (d.empty) {
+    console.log("user does not added");
     return false;
   }
-  const snap = await getDocs(q);
-  if (snap.size) {
-    chatPresented = true;
-  }
-
-  return chatPresented;
+  console.log(`user alrady persented`);
+  return true;
 }
+// async function checkChatList(chatId) {
+//   const userId = getUserId();
+//   console.log(`checking chat List`);
+//   let chatPresented = false;
+//   const q = query(
+//     collection(db, `users/${userId}/chats`),
+//     where("chatId", "==", chatId)
+//   );
 
-async function updateChatObj(chatId, chatDetail) {
-  const userId = getUserId();
-  try {
-    const updatedMembersId = [...chatDetail.membersId, userId];
-    console.log(updatedMembersId);
+//   const docObj = await getDoc(doc(db, `chats/${chatId}`));
+//   if (!Object.keys(docObj.data())) {
+//     console.warn(`chat not found ${chatId}`);
+//     return false;
+//   }
+//   const snap = await getDocs(q);
+//   if (snap.size) {
+//     chatPresented = true;
+//   }
 
-    await setDoc(doc(db, "chats", chatId), {
-      ...chatDetail,
-      membersId: updatedMembersId,
-    });
-  } catch (error) {
-    console.log(error, "while updating the chtdetai");
-  }
-}
+//   return chatPresented;
+// }
+
+// async function updateChatObj(chatId, chatDetail) {
+//   const userId = getUserId();
+//   try {
+//     const updatedMembersId = [...chatDetail.membersId, userId];
+//     console.log(updatedMembersId);
+
+//     await setDoc(doc(db,`chats/${chatId}`), {
+//       ...chatDetail,
+//       membersId: updatedMembersId,
+//     });
+//   } catch (error) {
+//     console.log(error, "while updating the chtdetai");
+//   }
+// }

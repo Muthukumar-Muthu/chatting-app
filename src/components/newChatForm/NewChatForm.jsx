@@ -7,7 +7,7 @@ const NewChatForm = () => {
   const [newChat, setNewChat] = useState({
     data: {},
     error: null,
-    loading: true,
+    loading: false,
   });
   const {
     data: { chatId },
